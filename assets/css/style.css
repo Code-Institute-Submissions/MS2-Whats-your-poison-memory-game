@@ -1,0 +1,45 @@
+.background {
+    height: 100vh;
+    display: flex;
+    position: relative;
+    background: url("../images/french-bar.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.mainMenu {
+    background-color: black;
+    width: 50wh;
+    color: white;
+    opacity: 0.9;
+    border-radius: 20px;
+}
+
+.start-button {
+    color: white;
+    background-color: black;
+    opacity: 0.9;
+    border-radius: 20px;
+    width: 200px;
+}
+
+.menu-button {
+    color:black;
+    background-color: white;
+    border-radius: 20px;
+    width: 200px;
+    margin: 20px;
+}
