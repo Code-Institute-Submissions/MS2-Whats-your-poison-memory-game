@@ -15,20 +15,33 @@
 </head>
 
 <body>
-    <div class="container-fluid background center">
+    <nav class="navbar fixed-top">
+        <div class="row">
+            <div class="col-4">
+                <button type="button" class="btn mute-button">
+                    Mute
+                </button>
+            </div>
+            <div class="col-8">
+                <a class="navbar-brand">What's your poison?</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid background">
+        <div class="container game-screen center">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn start-button" data-toggle="modal" data-target="#firstModal">
+                Let's begin
+            </button>
+        </div>
 
-        <!-- Button trigger modal -->
-        <button type="button" class="btn start-button" data-toggle="modal" data-target="#firstmodal">
-            Let's begin
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="firstmodal" tabindex="-1" role="dialog" aria-labelledby="firstMenu"
+        <!-- Main Menu Modal -->
+        <div class="modal fade" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="firstMenu"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content mainMenu">
                     <div class="modal-header d-block">
-                        <h5 class="modal-title text-center" id="exampleModalCenterTitle">What's your poison?</h5>
+                        <h4 class="modal-title text-center">What's your poison?</h4>
                     </div>
                     <div class="modal-body center">
                         <ul>
@@ -39,14 +52,17 @@
                                 <p>What do you fancy first?</p>
                             </li>
                             <li>
-                                <button type="button" class="btn menu-button" data-dismiss="modal">How do you
-                                    play?</button>
+                                <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                                    data-target="#howToPlayModal" data-dismiss="modal">How to play?</button>
                             </li>
                             <li>
-                                <button type="button" class="btn menu-button">New Game</button>
+                                <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                                    data-target="#newGameModal" data-dismiss="modal">New Game</button>
                             </li>
                             <li>
-                                <button type="button" class="btn menu-button">Fastest drinks!</button>
+                                <button type="button" class="btn menu-button button-click"
+                                    onclick="window.location.href='bestTimes.html';">
+                                    Fastest drinkers on record!</button>
                             </li>
                         </ul>
                     </div>
@@ -54,9 +70,78 @@
             </div>
         </div>
 
+        <!-- How to play Modal -->
+        <div class="modal fade" id="howToPlayModal" tabindex="-1" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content mainMenu">
+                    <div class="modal-header d-block">
+                        <h4 class="modal-title text-center">Rules to follow while your here</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ol>
+                            <li>
+                                <p>Pick your game difficulty setting</p>
+                                <p>Easy, 12 cards</p>
+                                <p>Medium, 20 cards</p>
+                                <p>Hard, 30 cards</p>
+                            </li>
+                            <li>
+                                <p>You may turn over 2 cards at a time, if they are a match they will remain face up. If
+                                    they are not they will flip over again and you must remember where you left your
+                                    drinks!</p>
+                            </li>
+                            <li>
+                                <p>The aim of the game is to match all the drinks in the quickest time possible to get
+                                    your name on top of the scoreboard.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer center">
+                        <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                            data-target="#firstModal" data-dismiss="modal">Exit</button>
+                    </div>
 
+                </div>
+            </div>
+        </div>
 
+        <!-- New Game Modal -->
+        <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-labelledby="gameMenu"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content mainMenu">
+                    <div class="modal-header d-block">
+                        <h4 class="modal-title text-center">Game difficulty?</h4>
+                    </div>
+                    <div class="modal-body center">
+                        <ul>
+                            <li>
+                                <p>So your ready to begin, your options are:</p>
+                            </li>
+                            <li>
+                                <button type="button" class="btn menu-button button-click gameLevel"
+                                    onclick="window.location.href='theBar.html';" id="easy">Easy - 12 drinks</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn menu-button button-click gameLevel"
+                                    onclick="window.location.href='theBar.html';" id="medium">Medium - 20
+                                    drinks</button>
+                            </li>
+                            <li>
+                                <button type="button" class="btn menu-button button-click gameLevel"
+                                    onclick="window.location.href='theBar.html';" id="hard">Hard - 30 drinks</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer center">
+                        <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                            data-target="#firstModal" data-dismiss="modal">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script src="assets/scripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
