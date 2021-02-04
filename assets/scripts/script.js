@@ -1,63 +1,46 @@
-const cards = document.querySelectorAll('.memory-card');
 
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
+const cardImages = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 
+'margarita', 'martini', 'maryPickford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise'];
+let cardsLength = 0;
+let cardsPerRow;
+let gameLevel = sessionStorage.getItem("gameLevel");
+let matchedPairs = 0;
+let maxPairs = 0;
 
-function flipCard() {
-    if (lockBoard) return;
-    if (this === firstCard) return;
+// Check local and session storage
+checkDataStorage();
 
-    this.classList.add("flip");
+// Check game difficulty setting
+gameSetup();
 
-    if (!hasFlippedCard) {
-        // first click
-        hasFlippedCard = true;
-        firstCard = this;
+// Seting game difficulty in local storage
+$('#easy').click(function () {
+    sessionStorage.setItem("gameLevel", "easy");
+});
+$('#medium').click(function () {
+    sessionStorage.setItem("gameLevel", "medium");
+});
+$('#hard').click(function () {
+    sessionStorage.setItem("gameLevel", "hard");
+});
 
-        return;
+// Game set up to start
+function gameSetup() {
+    switch (gameLevel) {
+        case ("easy"):
+            maxPairs = 6;
+            cardsLength = 12;
+            cardsPerRow = 'col-4';
+            break;
+        case ("medium"):
+            maxPairs = 10;
+            cardsLength = 20;
+            cardsPerRow = 'col-4';
+            break;
+        case ("hard"):
+            maxPairs = 15;
+            cardsLength = 30;
+            cardsPerRow = 'col-6';
+            break;
     }
-    // second click
-    hasFlippedCard = false;
-    secondCard = this;
-
-    checkForMatch();
-}
-
-function checkForMatch() {
-    let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-    isMatch ? disableCards() : unflipsCards();
-}
-
-function disableCards() {
-    firstCard.removeEventListener("click", flipCard);
-    SecondCard.removeEventListener("click", flipCard);
-
-    resetBoard();
-}
-
-function unflipsCards() {
-    lockBoard = true;
-
-    setTimeout(() => {
-        firstCard.classList.remove("flip");
-        secondCard.classList.remove("flip");
-
-        resetBoard();
-    }, 1500);
-}
-
-function resetBoard() {
-    [hasFlippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
-}
-
-(function shuffle() {
-    cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 12);
-        card.style.order = randomPos;
-    });
-})();
-
-cards.forEach(card => card.addEventListener("click", flipCard));
+};
