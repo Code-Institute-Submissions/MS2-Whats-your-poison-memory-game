@@ -30,17 +30,17 @@ function gameSetup() {
         case ("easy"):
             maxPairs = 6;
             cardsLength = 12;
-            cardsPerRow = 'col-4';
+            cardsPerRow = 'col-3';
             break;
         case ("medium"):
             maxPairs = 10;
             cardsLength = 20;
-            cardsPerRow = 'col-4';
+            cardsPerRow = 'col-3';
             break;
         case ("hard"):
             maxPairs = 15;
             cardsLength = 30;
-            cardsPerRow = 'col-6';
+            cardsPerRow = 'col-2';
             break;
     }
 };
