@@ -49,8 +49,8 @@ ul, ol {
     background-color: black;
     opacity: 0.9;
     border-radius: 20px;
-    width: 300px;
-    height: 200px;
+    width: 250px;
+    height: 175px;
     font-size: 30px;
 }
 
@@ -79,6 +79,49 @@ ul, ol {
 
 }
 
-
-
 /* theBar.html */
+
+.game-box {
+    display: flex;
+    justify-content: center;
+}
+
+.game-content {
+    position: absolute;
+    top: 150px;
+    width: 80%;
+    bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    z-index: -1;
+}
+
+.cards {
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+	border: 5px transparent;
+    cursor: pointer;
+}
+
+.frontFace,
+.backFace {
+    width: 95%;
+    height: 95%;
+    padding: 5px; 
+    position: absolute; 
+    backface-visibility: hidden; 
+}
+
+.backFace {
+    background-image: url("../images/shaker.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+	border: 2px solid white;
+}
+
+.front-face {
+    transform: rotateY(180deg);
+}
