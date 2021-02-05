@@ -15,21 +15,30 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top">
-        <div class="row">
-            <div class="col-4">
+    <!-- Title -->
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12">
+                <h1 class="header">What's your poison?</h1>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-12 text-center">
                 <button type="button" class="btn mute-button">
                     Mute
                 </button>
             </div>
-            <div class="col-8">
-                <a class="navbar-brand">What's your poison?</a>
-            </div>
         </div>
-    </nav>
-    <div class="container-fluid background">
-        <div class="container game-screen center">
-        </div>
+    </div>
+
+    <!-- Central container for everything -->
+    <div class="container fluid game-content">
+
+        <!-- Button trigger modal -->
+        <button type="button" class="center start-button" data-toggle="modal" data-target="#firstModal">
+            Let's begin
+        </button>
+
     </div>
 
     <script src="assets/scripts/script.js"></script>
