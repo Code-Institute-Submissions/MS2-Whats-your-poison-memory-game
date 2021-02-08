@@ -85,10 +85,30 @@ ul, ol {
     justify-content: center;
 }
 
-.game-content {
+.game-content-small {
     position: absolute;
     top: 150px;
     max-width: 780px;
+    bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.game-content-medium {
+    position: absolute;
+    top: 150px;
+    max-width: 1100px;
+    bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
+
+.game-content-large {
+    position: absolute;
+    top: 150px;
+    max-width: 900px;
     bottom: 60px;
     display: flex;
     flex-wrap: wrap;
