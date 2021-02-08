@@ -89,7 +89,7 @@ ul, ol {
 .game-content {
     position: absolute;
     top: 150px;
-    width: 80%;
+    max-width: 780px;
     bottom: 60px;
     display: flex;
     flex-wrap: wrap;
