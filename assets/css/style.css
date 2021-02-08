@@ -138,7 +138,7 @@ ul, ol {
 /* CARDS */
 .aviation {
     background-image: url("../images/aviation.jpg");
-    background-size: 65%;
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -150,7 +150,7 @@ ul, ol {
 }
 .champagneCocktail {
     background-image: url("../images/champagneCocktail.jpg");
-    background-size: 60%;
+    background-size: 65%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -210,19 +210,19 @@ ul, ol {
 }
 .oldFashioned {
     background-image: url("../images/oldFashioned.jpg");
-    background-size: 70%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
 }
 .piscoSour {
     background-image: url("../images/piscoSour.jpg");
-    background-size: 50%;
+    background-size: 75%;
     background-repeat: no-repeat;
     background-position: center;
 }
 .tequilaSunrise {
     background-image: url("../images/tequilaSunrise.jpg");
-    background-size: 60%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
 }
