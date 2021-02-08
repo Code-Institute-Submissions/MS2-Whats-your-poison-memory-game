@@ -1,7 +1,8 @@
 
 const cards = document.querySelectorAll('.cards');
-const cardImages = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai',
-    'margarita', 'martini', 'maryPickford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise'];
+const cardImages = ['aviation', 'aviation', 'bloodyMary', 'bloodyMary', 'champagneCocktail', 'champagneCocktail', 'cosmopolitan', 'cosmopolitan',
+    'french75', 'french75', 'longIsland', 'longIsland', 'maiTai', 'maiTai', 'margarita', 'margarita', 'martini', 'martini', 'maryPickford',
+    'maryPickford', 'mimosa', 'mimosa', 'mojito', 'mojito', 'oldFashioned', 'oldFashioned', 'piscoSour', 'piscoSour', 'tequilaSunrise', 'tequilaSunrise'];
 
 let cardsLength;
 let cardsPerRow = '';
@@ -14,7 +15,7 @@ let lockBoard = false;
 let matchedPairs = 0;
 let maxPairs = 0;
 
-// Check game difficulty setting
+// Check game difficulty setting and build layout
 gameSetup();
 buildLayout();
 
@@ -23,22 +24,29 @@ function buildLayout() {
     document.getElementById("game-board").classList.add(gameContentColSize);
 
     let game = document.getElementById("game-board");
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < cardsLength; i++) {
         let card = document.createElement('div');
         card.className = (`${cardsPerRow} cards`);
-        card.addEventListener('click', flipCard)
+        card.setAttribute('data-id', cardImages[i]);
+        card.addEventListener('click', flipCard);
 
         let frontOfCard = document.createElement('div');
-        frontOfCard.className = "frontFace";
+        frontOfCard.className = `frontFace ${cardImages[i]}`;
 
         let backOfCard = document.createElement('div');
-        backOfCard.className= "backFace";
+        backOfCard.className = "backFace";
 
         card.append(frontOfCard, backOfCard);
 
         game.appendChild(card);
     }
-}
+    cards.forEach(cards => {
+        let randomPos = Math.floor(Math.random() * 12);
+        cards.style.order = randomPos;
+    });
+};
+
+
 
 function flipCard() {
     if (lockBoard) return;
@@ -54,18 +62,18 @@ function flipCard() {
     secondCard = this;
 
     checkForMatch();
-}
+};
 
 function checkForMatch() {
     let isMatch = firstCard.dataset.id === secondCard.dataset.id;
     isMatch ? disableCards() : unflipCards();
-}
+};
 
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
     resetBoard();
-}
+};
 
 function unflipCards() {
     lockBoard = true;
@@ -74,19 +82,12 @@ function unflipCards() {
         secondCard.classList.remove('flip');
         resetBoard();
     }, 900);
-}
+};
 
 function resetBoard() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
-}
-
-(function shuffle() {
-    cards.forEach(cards => {
-        let randomPos = Math.floor(Math.random() * 12);
-        cards.style.order = randomPos
-    });
-})();
+};
 
 // Seting game difficulty in local storage
 $('#easy').click(function () {
