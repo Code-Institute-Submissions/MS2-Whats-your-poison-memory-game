@@ -12,7 +12,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: top;
+    z-index: -1;
 }
 
 .mute-button {
@@ -80,7 +80,6 @@ ul, ol {
 }
 
 /* theBar.html */
-
 .game-box {
     display: flex;
     justify-content: center;
@@ -94,24 +93,38 @@ ul, ol {
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
-    z-index: -1;
 }
 
 .cards {
+    position: relative;
     transform: scale(1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transform-style: preserve-3d;
-    transition: transform 0.5s;
-	border: 5px transparent;
-    cursor: pointer;
+    transition: transform .5s;
+}
+
+.cards:active {
+    transform: scale(.97);
+    transition: transform .2s;
+}
+
+.cards.flip {
+    transform: rotateY(180deg);
 }
 
 .frontFace,
 .backFace {
-    width: 95%;
-    height: 95%;
-    padding: 5px; 
+    height: 98%;
+    width: 98%;
+    background-color: white;
     position: absolute; 
     backface-visibility: hidden; 
+}
+
+.frontFace {
+    transform: rotateY(180deg);
 }
 
 .backFace {
@@ -119,9 +132,97 @@ ul, ol {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-	border: 2px solid white;
+	border: 2px solid grey;
 }
 
-.front-face {
-    transform: rotateY(180deg);
+/* CARDS */
+.aviation {
+    background-image: url("../images/aviation.jpg");
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bloodyMary {
+    background-image: url("../images/bloodyMary.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.champagneCocktail {
+    background-image: url("../images/champagneCocktail.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.cosmopolitan {
+    background-image: url("../images/cosmopolitan.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.french75 {
+    background-image: url("../images/french75.jpg");
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.longIsland {
+    background-image: url("../images/longIsland.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.maiTai {
+    background-image: url("../images/maiTai.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.margarita {
+    background-image: url("../images/margarita.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.martini {
+    background-image: url("../images/martini.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.maryPicford {
+    background-image: url("../images/maryPicford.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mimosa {
+    background-image: url("../images/mimosa.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mojito {
+    background-image: url("../images/mojito.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.oldFashioned {
+    background-image: url("../images/oldFashioned.jpg");
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.piscoSour {
+    background-image: url("../images/piscoSour.jpg");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.tequilaSunrise {
+    background-image: url("../images/tequilaSunrise.jpg");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
 }
