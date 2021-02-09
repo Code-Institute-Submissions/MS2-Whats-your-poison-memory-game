@@ -1,13 +1,13 @@
 
-const cards = document.querySelectorAll('.cards');
+let cards = document.querySelectorAll("cards");
 const cardImages = ['aviation', 'aviation', 'bloodyMary', 'bloodyMary', 'champagneCocktail', 'champagneCocktail', 'cosmopolitan', 'cosmopolitan',
     'french75', 'french75', 'longIsland', 'longIsland', 'maiTai', 'maiTai', 'margarita', 'margarita', 'martini', 'martini', 'maryPickford',
     'maryPickford', 'mimosa', 'mimosa', 'mojito', 'mojito', 'oldFashioned', 'oldFashioned', 'piscoSour', 'piscoSour', 'tequilaSunrise', 'tequilaSunrise'];
 
 let cardsLength;
 let cardsPerRow = '';
+let colStyle;
 let firstCard, secondCard;
-let gameContentColSize = '';
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
 let HighScoreData;
@@ -15,13 +15,15 @@ let lockBoard = false;
 let matchedPairs = 0;
 let maxPairs = 0;
 
-// Check game difficulty setting and build layout
-gameSetup();
-buildLayout();
+//Run functions in order
+$('.new-game').click(function () {
+    gameSetup();
+    buildLayout();
+});
 
 //set game-content and card divs
 function buildLayout() {
-    document.getElementById("game-board").classList.add(gameContentColSize);
+    document.getElementById("game-board").classList.add(colStyle);
 
     let game = document.getElementById("game-board");
     for (let i = 0; i < cardsLength; i++) {
@@ -40,13 +42,7 @@ function buildLayout() {
 
         game.appendChild(card);
     }
-    cards.forEach(cards => {
-        let randomPos = Math.floor(Math.random() * 12);
-        cards.style.order = randomPos;
-    });
 };
-
-
 
 function flipCard() {
     if (lockBoard) return;
@@ -107,19 +103,19 @@ function gameSetup() {
             maxPairs = 6;
             cardsLength = 12;
             cardsPerRow = 'col-3';
-            gameContentColSize = 'game-content-small'
+            colStyle = 'game-content-small';
             break;
         case ("medium"):
             maxPairs = 9;
             cardsLength = 18;
             cardsPerRow = 'col-2';
-            gameContentColSize = 'game-content-medium'
+            colStyle = 'game-content-medium';
             break;
         case ("hard"):
             maxPairs = 12;
             cardsLength = 24;
             cardsPerRow = 'col-2';
-            gameContentColSize = 'game-content-large'
+            colStyle = 'game-content-large';
             break;
     }
 };
