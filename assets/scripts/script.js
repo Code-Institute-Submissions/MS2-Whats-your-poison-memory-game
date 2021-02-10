@@ -1,12 +1,11 @@
 
 let cards = document.querySelectorAll("cards");
-const cardImages = ['aviation', 'aviation', 'bloodyMary', 'bloodyMary', 'champagneCocktail', 'champagneCocktail', 'cosmopolitan', 'cosmopolitan',
-    'french75', 'french75', 'longIsland', 'longIsland', 'maiTai', 'maiTai', 'margarita', 'margarita', 'martini', 'martini', 'maryPickford',
-    'maryPickford', 'mimosa', 'mimosa', 'mojito', 'mojito', 'oldFashioned', 'oldFashioned', 'piscoSour', 'piscoSour', 'tequilaSunrise', 'tequilaSunrise'];
+let cardImages = [];
+const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
 
-let cardsLength;
+let cardsLength; // This is used to ...
 let cardsPerRow = '';
-let colStyle;
+let colStyle = '';
 let firstCard, secondCard;
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
@@ -14,18 +13,46 @@ let HighScoreData;
 let lockBoard = false;
 let matchedPairs = 0;
 let maxPairs = 0;
+let selected = [];
+let shuffled = [];
 
-//Run functions in order
-$('.new-game').click(function () {
-    gameSetup();
+/*
+GAME IS OVER
+------------
+Display modal with score
+Save score in localStorage
+Provide option to restart or change difficulty
+*/
+
+/* 
+Run functions in order 
+*/
+$('document').ready(function () {
+    // grab the query parameter from the url and pass it to game setup
+    let difficulty = new URLSearchParams(window.location.search).get('difficulty');
+    gameSetup(difficulty);
     buildLayout();
 });
 
+/*
+This is function doc. This describes what the function is supposed to accomplish.
+*/
+function dummyFunctionForCommentExplanation() {
+    // This is an inline comment
+    2 + 2
+    // Another comment describing the code
+}
+
+
 //set game-content and card divs
 function buildLayout() {
-    document.getElementById("game-board").classList.add(colStyle);
-
     let game = document.getElementById("game-board");
+    game.classList.add(colStyle);
+
+    let shuffled = cardRange.sort(function () { return .5 - Math.random() });
+    let selected = shuffled.slice(0, maxPairs);
+    let cardImages = selected.concat(selected); cardImages.sort(function () { return .5 - Math.random() });
+
     for (let i = 0; i < cardsLength; i++) {
         let card = document.createElement('div');
         card.className = (`${cardsPerRow} cards`);
@@ -39,6 +66,16 @@ function buildLayout() {
         backOfCard.className = "backFace";
 
         card.append(frontOfCard, backOfCard);
+
+        /*
+        The html looks like this:
+        <div class="col-3 cards" data-id="bloodyMary">
+            <div class="frontFace bloodyMary">
+            </div>
+            <div class="backFace">
+            </div>
+        </div>
+        */
 
         game.appendChild(card);
     }
@@ -68,7 +105,7 @@ function checkForMatch() {
 function disableCards() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-    resetBoard();
+    resetBoardStatus();
 };
 
 function unflipCards() {
@@ -76,29 +113,33 @@ function unflipCards() {
     setTimeout(() => {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
-        resetBoard();
+        resetBoardStatus();
     }, 900);
 };
 
-function resetBoard() {
+function resetBoardStatus() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
 };
 
-// Seting game difficulty in local storage
-$('#easy').click(function () {
-    sessionStorage.setItem("gameLevel", "easy");
-});
-$('#medium').click(function () {
-    sessionStorage.setItem("gameLevel", "medium");
-});
-$('#hard').click(function () {
-    sessionStorage.setItem("gameLevel", "hard");
-});
+//// Seting game difficulty in local storage
+//$('#easy').click(function () {
+//    sessionStorage.setItem("gameLevel", "easy");
+//});
+//$('#medium').click(function () {
+//    sessionStorage.setItem("gameLevel", "medium");
+//});
+//$('#hard').click(function () {
+//    sessionStorage.setItem("gameLevel", "hard");
+//});
+
+function saveScore(score) {
+    //    sessionStorage.setItem("gameLevel", "hard");
+}
 
 // Game set up to start
-function gameSetup() {
-    switch (gameLevel) {
+function gameSetup(difficulty) {
+    switch (difficulty) {
         case ("easy"):
             maxPairs = 6;
             cardsLength = 12;

@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <title>What's your poison?</title>
 </head>
@@ -32,17 +28,17 @@
     </div>
 
     <!-- Central container for everything -->
-    <div class="container fluid">
+    <div class="container-fluid">
 
         <!-- Button trigger modal -->
-        <button type="button" class="center start-button" data-toggle="modal" data-target="#firstModal">
+        <button type="button" class="center start-button" data-toggle="modal" data-target="#mainMenuModal">
             Let's begin
         </button>
-
     </div>
 
     <!-- Main Menu Modal -->
-    <div class="modal fade" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="firstMenu" aria-hidden="true">
+    <div class="modal fade" id="mainMenuModal" tabindex="-1" role="dialog" aria-labelledby="mainMenuModal"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
@@ -103,9 +99,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn exit-button button-click" data-toggle="modal"
-                        data-target="#firstModal" data-dismiss="modal">Exit</button>
+                        data-target="#mainMenuModal" data-dismiss="modal">Exit</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -124,29 +119,29 @@
                         </li>
                         <li>
                             <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html';" id="easy">Easy - 12 drinks</button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html';" id="medium">Medium - 20
+                                onclick="window.location.href='theBar.html?difficulty=easy';" id="easy">Easy - 12
                                 drinks</button>
                         </li>
                         <li>
                             <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html';" id="hard">Hard - 30 drinks</button>
+                                onclick="window.location.href='theBar.html?difficulty=medium';" id="medium">Medium - 20
+                                drinks</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn menu-button new-game"
+                                onclick="window.location.href='theBar.html?difficulty=hard';" id="hard">Hard - 30
+                                drinks</button>
                         </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn exit-button button-click" data-toggle="modal"
-                        data-target="#firstModal" data-dismiss="modal">Exit</button>
+                        data-target="#mainMenuModal" data-dismiss="modal">Exit</button>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <script src="./assets/scripts/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -156,6 +151,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="./assets/scripts/script.js"></script>
 </body>
 
 </html>
