@@ -11,17 +11,36 @@
 </head>
 
 <body>
+
     <!-- Title -->
     <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12">
+        <div class="row no-gutters">
+            <div class="col-2">
+                <button type="button" class="btn option-button center">
+                    Mute
+                </button>
+            </div>
+            <div class="col-8">
                 <h1 class="header">What's your poison?</h1>
             </div>
+            <div class="col-2">
+
+            </div>
         </div>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-12 text-center">
-                <button type="button" class="btn mute-button">
-                    Mute
+    </div>
+
+    <!-- Score/Time/Exit -->
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-3 score-bar">
+                <p>Flips allowed: <span id="point"> 0 </span></p>
+            </div>
+            <div class="col-6 time-bar">
+                <p>Timer: <span id="timer"></span></p>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
+                    Exit
                 </button>
             </div>
         </div>
@@ -30,6 +49,122 @@
     <!-- Central container for everything -->
     <div class="container game-box">
         <div class="container-fluid no-gutters" id="game-board"></div>
+    </div>
+
+    <!-- Game Won Modal -->
+    <div class="modal fade" id="GameWonModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mainMenu">
+                <div class="modal-header d-block">
+                    <h4 class="modal-title text-center">Congratulations!! You drank the lot!</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="game-won container">
+                        <div class="row no-gutters time">
+                            <div class="col-6">
+                                <span>Time remaining:</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="finishTime"></span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters clicks">
+                            <div class="col-6">
+                                <span>Excessive card flips:</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="extraFlips"></span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters score">
+                            <div class="col-6">
+                                <span>Final Score:</span>
+                            </div>
+                            <div class="col-6">
+                                <span class="finalScore"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                        data-target="#newGameModal" data-dismiss="modal">Play again</button>
+                    <button type="button" class="btn exit-button button-click"
+                        onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Lost Modal -->
+    <div class="modal fade" id="GameLostModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mainMenu">
+                <div class="modal-header d-block">
+                    <h3 class="modal-title text-center">Closing time! Get out.</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="game-lost container">
+                        <p>Looks like you've had one too many already! Times up I'm afraid,
+                            you just weren't quick enough....
+                        </p>
+                        <p>Better luck next time.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-12">
+                            <div class="row d-flex justify-content-center">
+                                <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                                    data-target="#newGameModal" data-dismiss="modal">Play again</button>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <button type="button" class="btn exit-button button-click"
+                                    onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Game Modal -->
+    <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-labelledby="gameMenu" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mainMenu">
+                <div class="modal-header d-block">
+                    <h4 class="modal-title text-center">Game difficulty?</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>
+                            <p>So your ready to begin, your options are:</p>
+                        </li>
+                        <li>
+                            <button type="button" class="btn menu-button new-game"
+                                onclick="window.location.href='theBar.html?difficulty=easy';" id="easy">Easy - 12
+                                drinks</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn menu-button new-game"
+                                onclick="window.location.href='theBar.html?difficulty=medium';" id="medium">Medium -
+                                20
+                                drinks</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn menu-button new-game"
+                                onclick="window.location.href='theBar.html?difficulty=hard';" id="hard">Hard - 30
+                                drinks</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn exit-button button-click" data-toggle="modal"
+                        data-target="#mainMenuModal" data-dismiss="modal">Exit</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

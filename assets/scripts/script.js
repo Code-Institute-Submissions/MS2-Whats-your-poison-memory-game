@@ -5,8 +5,12 @@ const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan'
 
 let cardsLength; // This is used to ...
 let cardsPerRow = '';
+let clicksAllowed = 0;
 let colStyle = '';
+let extraTime = 0;
 let firstCard, secondCard;
+let firstClick = 0;
+let flippedCardCount = 0;
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
 let HighScoreData;
@@ -15,14 +19,6 @@ let matchedPairs = 0;
 let maxPairs = 0;
 let selected = [];
 let shuffled = [];
-
-/*
-GAME IS OVER
-------------
-Display modal with score
-Save score in localStorage
-Provide option to restart or change difficulty
-*/
 
 /* 
 Run functions in order 
@@ -34,21 +30,45 @@ $('document').ready(function () {
     buildLayout();
 });
 
+
 /*
-This is function doc. This describes what the function is supposed to accomplish.
+set game-content and card divs..............
 */
-function dummyFunctionForCommentExplanation() {
-    // This is an inline comment
-    2 + 2
-    // Another comment describing the code
-}
 
+function gameSetup(difficulty) {
+    switch (difficulty) {
+        case ("easy"):
+            maxPairs = 6;
+            cardsLength = 12;
+            cardsPerRow = 'col-3';
+            colStyle = 'game-content-small';
+            clicksAllowed = 24;
+            extraTime = 0;
+            break;
+        case ("medium"):
+            maxPairs = 9;
+            cardsLength = 18;
+            cardsPerRow = 'col-2';
+            colStyle = 'game-content-medium';
+            clicksAllowed = 36;
+            extraTime = 15000;
+            break;
+        case ("hard"):
+            maxPairs = 12;
+            cardsLength = 24;
+            cardsPerRow = 'col-2';
+            colStyle = 'game-content-large';
+            clicksAllowed = 48;
+            extraTime = 30000;
+            break;
+    }
+};
 
-//set game-content and card divs
 function buildLayout() {
     let game = document.getElementById("game-board");
     game.classList.add(colStyle);
 
+    // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
     let shuffled = cardRange.sort(function () { return .5 - Math.random() });
     let selected = shuffled.slice(0, maxPairs);
     let cardImages = selected.concat(selected); cardImages.sort(function () { return .5 - Math.random() });
@@ -81,7 +101,15 @@ function buildLayout() {
     }
 };
 
+
+/*
+Game play functions.................................
+*/
+
 function flipCard() {
+    firstClick += 1;
+    if (firstClick == 1) timer(30);
+
     if (lockBoard) return;
     if (this === firstCard) return;
 
@@ -94,21 +122,31 @@ function flipCard() {
     }
     secondCard = this;
 
+    flippedCardCount += 2;
+
     checkForMatch();
 };
 
 function checkForMatch() {
     let isMatch = firstCard.dataset.id === secondCard.dataset.id;
-    isMatch ? disableCards() : unflipCards();
+    isMatch ? pairMatched() : pairDontMatch();
 };
 
-function disableCards() {
+function pairMatched() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-    resetBoardStatus();
+
+    matchedPairs += 1;
+
+    if (matchedPairs === maxPairs) {
+        //winSound.play();
+        gameComplete();
+    } else {
+        resetBoardStatus();
+    }
 };
 
-function unflipCards() {
+function pairDontMatch() {
     lockBoard = true;
     setTimeout(() => {
         firstCard.classList.remove('flip');
@@ -122,41 +160,39 @@ function resetBoardStatus() {
     [firstCard, secondCard] = [null, null];
 };
 
-//// Seting game difficulty in local storage
-//$('#easy').click(function () {
-//    sessionStorage.setItem("gameLevel", "easy");
-//});
-//$('#medium').click(function () {
-//    sessionStorage.setItem("gameLevel", "medium");
-//});
-//$('#hard').click(function () {
-//    sessionStorage.setItem("gameLevel", "hard");
-//});
-
-function saveScore(score) {
-    //    sessionStorage.setItem("gameLevel", "hard");
+function gameComplete() {
+    $('#GameWonModal').modal('toggle');
 }
 
-// Game set up to start
-function gameSetup(difficulty) {
-    switch (difficulty) {
-        case ("easy"):
-            maxPairs = 6;
-            cardsLength = 12;
-            cardsPerRow = 'col-3';
-            colStyle = 'game-content-small';
-            break;
-        case ("medium"):
-            maxPairs = 9;
-            cardsLength = 18;
-            cardsPerRow = 'col-2';
-            colStyle = 'game-content-medium';
-            break;
-        case ("hard"):
-            maxPairs = 12;
-            cardsLength = 24;
-            cardsPerRow = 'col-2';
-            colStyle = 'game-content-large';
-            break;
-    }
-};
+function gameOver() {
+    $('#GameLostModal').modal('toggle');
+}
+
+/*
+Display count functions for time, clicks and work out final score.......
+*/
+// Game timer
+function timer(time) {
+    time = new Date().getTime() + (time * 1000);
+    gameTime = setInterval(function () {
+        let now = new Date().getTime();
+        timeDiff = time - now + extraTime;
+        let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        timeRemaining = (minutes * 60) + seconds;
+        $("#timer").html(minutes + "m " + seconds + "s ");
+        if (timeDiff < 1000) {
+            clearInterval(gameTime);
+            $("#timer").html("Time's Up!");
+            gameOver();
+        }
+    }, 1000);
+}
+
+// Sound Effect
+
+//var backGroundSound;
+//var correctSound;
+//var errorSound;
+//var winSound;
+//var lossSound;

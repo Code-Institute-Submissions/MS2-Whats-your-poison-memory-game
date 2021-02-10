@@ -15,23 +15,24 @@ body {
     z-index: -1;
 }
 
-.mute-button {
+.option-button {
     color: white;
     background-color: red;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    border-radius: 10%;
+    width: 80px;
+    height: 40px;
+    text-align: center;
 }
 
 .header {
     color: white;
-    font-size: 50px;
     text-align: center;
 }
 
 ul, ol {
     list-style-type: none;
     text-align: center;
+    align-items: center;
 }
 
 .center {
@@ -80,6 +81,14 @@ ul, ol {
 }
 
 /* theBar.html */
+.score-bar
+.time-bar, p {
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-top: 8px;
+}
+
 .game-box {
     display: flex;
     justify-content: center;
