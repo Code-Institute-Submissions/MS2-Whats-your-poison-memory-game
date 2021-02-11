@@ -13,7 +13,7 @@
 <body>
 
     <!-- Title -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row no-gutters">
             <div class="col-2">
                 <button type="button" class="btn option-button center">
@@ -24,7 +24,9 @@
                 <h1 class="header">What's your poison?</h1>
             </div>
             <div class="col-2">
-
+                <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
+                    Exit
+                </button>
             </div>
         </div>
     </div>
@@ -32,16 +34,11 @@
     <!-- Score/Time/Exit -->
     <div class="container">
         <div class="row no-gutters">
-            <div class="col-3 score-bar">
+            <div class="col-6 score-bar">
                 <p>Flips allowed: <span id="flipsAllowed"> 0 </span></p>
             </div>
             <div class="col-6 time-bar">
                 <p>Timer: <span id="timer"></span></p>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
-                    Exit
-                </button>
             </div>
         </div>
     </div>
@@ -65,15 +62,15 @@
                                 <span>Time remaining:</span>
                             </div>
                             <div class="col-6">
-                                <span class="finishTime"></span>
+                                <span id="finishTime"></span>
                             </div>
                         </div>
                         <div class="row no-gutters clicks">
                             <div class="col-6">
-                                <span>Excessive card flips:</span>
+                                <span>Bonus Points:</span>
                             </div>
                             <div class="col-6">
-                                <span class="extraFlips"></span>
+                                <span id="bonusPoints"></span>
                             </div>
                         </div>
                         <div class="row no-gutters score">
@@ -81,7 +78,7 @@
                                 <span>Final Score:</span>
                             </div>
                             <div class="col-6">
-                                <span class="finalScore"></span>
+                                <span id="finalScore"></span>
                             </div>
                         </div>
                     </div>

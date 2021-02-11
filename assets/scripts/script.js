@@ -6,11 +6,11 @@ const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan'
 let cardsLength = 0; // This is used to ...
 let cardsPerRow = '';
 let clicksAllowed = 0;
+let clicksRemaining = 0;
 let colStyle = '';
 let extraTime = 0;
 let firstCard, secondCard;
 let firstClick = 0;
-let flippedCardCount = 0;
 let flipsAllowed = 0;
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
@@ -21,6 +21,7 @@ let maxPairs = 0;
 let selected = [];
 let shuffled = [];
 let startTime = "";
+let time = 0;
 
 /* 
 Run functions in order 
@@ -44,8 +45,7 @@ function gameSetup(difficulty) {
             cardsLength = 12;
             cardsPerRow = 'col-3';
             colStyle = 'game-content-small';
-            clicksAllowed = 24;
-            extraTime = 0;
+            time = 30000;
             startTime = '0m : 30s';
             break;
         case ("medium"):
@@ -53,18 +53,16 @@ function gameSetup(difficulty) {
             cardsLength = 18;
             cardsPerRow = 'col-2';
             colStyle = 'game-content-medium';
-            clicksAllowed = 36;
-            extraTime = 15000;
-            startTime = '0m : 45s';
+            time = 50000;
+            startTime = '0m : 50s';
             break;
         case ("hard"):
             maxPairs = 12;
             cardsLength = 24;
             cardsPerRow = 'col-2';
             colStyle = 'game-content-large';
-            clicksAllowed = 48;
-            extraTime = 30000;
-            startTime = '1m : 0s';
+            time = 75000;
+            startTime = '1m : 15s';
             break;
     }
 };
@@ -74,7 +72,7 @@ function buildLayout() {
     game.classList.add(colStyle);
 
     $("#timer").html(startTime);
-    let flipsAllowed = cardsLength * 2;
+    flipsAllowed = cardsLength * 2;
     $("#flipsAllowed").html(flipsAllowed);
 
     // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
@@ -117,9 +115,7 @@ Game play functions.................................
 
 function flipCard() {
     firstClick += 1;
-    let remainingflips = (flipsAllowed - 1);
-    $("#flipsAllowed").html(remainingflips);
-    if (firstClick == 1) timer(30);
+    if (firstClick == 1) timer(time);
 
     if (lockBoard) return;
     if (this === firstCard) return;
@@ -133,7 +129,8 @@ function flipCard() {
     }
     secondCard = this;
 
-    flippedCardCount += 2;
+    clicksRemaining = flipsAllowed -= 2;
+    $("#flipsAllowed").html(clicksRemaining);
 
     checkForMatch();
 };
@@ -172,10 +169,11 @@ function resetBoardStatus() {
 
 function gameComplete() {
     $('#GameWonModal').modal('toggle');
-}
-
-function gameOver() {
-    $('#GameLostModal').modal('toggle');
+    let bonusPoints = (clicksRemaining * 2);
+    let finalScore = (timeRemaining * 2 + bonusPoints);
+    $("#finishTime").html(timeRemaining);
+    $("#bonusPoints").html(bonusPoints);
+    $("#finalScore").html(finalScore);
 }
 
 /*
@@ -183,7 +181,7 @@ Display count functions for time, clicks and work out final score.......
 */
 // Game timer
 function timer(time) {
-    time = new Date().getTime() + (time * 1000);
+    time = new Date().getTime() + (time);
     gameTime = setInterval(function () {
         let now = new Date().getTime();
         timeDiff = time - now + extraTime;
@@ -197,6 +195,10 @@ function timer(time) {
             gameOver();
         }
     }, 1000);
+}
+
+function gameOver() {
+    $('#GameLostModal').modal('toggle');
 }
 
 // Sound Effect

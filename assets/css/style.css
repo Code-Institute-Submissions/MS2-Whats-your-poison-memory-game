@@ -255,3 +255,27 @@ ul, ol {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+/* bestTimes.html */
+.score-board {
+    background-color: black;
+    position: absolute;
+    top: 150px;
+    max-width: 500px;
+    bottom: 60px;
+    border-radius: 20px;
+	border: 2px solid grey;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    text-align: center;
+}
+
+.score-board table {
+    margin: auto;
+}
+
+.score-board table th,
+.score-board table td {
+    padding: 5px 22px;
+}
