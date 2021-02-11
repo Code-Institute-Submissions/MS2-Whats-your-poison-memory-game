@@ -3,7 +3,7 @@ let cards = document.querySelectorAll("cards");
 let cardImages = [];
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
 
-let cardsLength; // This is used to ...
+let cardsLength = 0; // This is used to ...
 let cardsPerRow = '';
 let clicksAllowed = 0;
 let colStyle = '';
@@ -11,6 +11,7 @@ let extraTime = 0;
 let firstCard, secondCard;
 let firstClick = 0;
 let flippedCardCount = 0;
+let flipsAllowed = 0;
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
 let HighScoreData;
@@ -19,6 +20,7 @@ let matchedPairs = 0;
 let maxPairs = 0;
 let selected = [];
 let shuffled = [];
+let startTime = "";
 
 /* 
 Run functions in order 
@@ -44,6 +46,7 @@ function gameSetup(difficulty) {
             colStyle = 'game-content-small';
             clicksAllowed = 24;
             extraTime = 0;
+            startTime = '0m : 30s';
             break;
         case ("medium"):
             maxPairs = 9;
@@ -52,6 +55,7 @@ function gameSetup(difficulty) {
             colStyle = 'game-content-medium';
             clicksAllowed = 36;
             extraTime = 15000;
+            startTime = '0m : 45s';
             break;
         case ("hard"):
             maxPairs = 12;
@@ -60,6 +64,7 @@ function gameSetup(difficulty) {
             colStyle = 'game-content-large';
             clicksAllowed = 48;
             extraTime = 30000;
+            startTime = '1m : 0s';
             break;
     }
 };
@@ -67,6 +72,10 @@ function gameSetup(difficulty) {
 function buildLayout() {
     let game = document.getElementById("game-board");
     game.classList.add(colStyle);
+
+    $("#timer").html(startTime);
+    let flipsAllowed = cardsLength * 2;
+    $("#flipsAllowed").html(flipsAllowed);
 
     // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
     let shuffled = cardRange.sort(function () { return .5 - Math.random() });
@@ -108,6 +117,8 @@ Game play functions.................................
 
 function flipCard() {
     firstClick += 1;
+    let remainingflips = (flipsAllowed - 1);
+    $("#flipsAllowed").html(remainingflips);
     if (firstClick == 1) timer(30);
 
     if (lockBoard) return;
@@ -135,15 +146,14 @@ function checkForMatch() {
 function pairMatched() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
-
     matchedPairs += 1;
 
-    if (matchedPairs === maxPairs) {
-        //winSound.play();
-        gameComplete();
-    } else {
-        resetBoardStatus();
-    }
+    checkGameWon();
+};
+
+function checkGameWon() {
+    let gameWon = matchedPairs === maxPairs;
+    gameWon ? (clearInterval(gameTime), gameComplete()) : resetBoardStatus();
 };
 
 function pairDontMatch() {
@@ -152,7 +162,7 @@ function pairDontMatch() {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
         resetBoardStatus();
-    }, 900);
+    }, 800);
 };
 
 function resetBoardStatus() {
@@ -180,7 +190,7 @@ function timer(time) {
         let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
         timeRemaining = (minutes * 60) + seconds;
-        $("#timer").html(minutes + "m " + seconds + "s ");
+        $("#timer").html(minutes + "m : " + seconds + "s ");
         if (timeDiff < 1000) {
             clearInterval(gameTime);
             $("#timer").html("Time's Up!");
