@@ -2,6 +2,18 @@
 let cards = document.querySelectorAll("cards");
 let cardImages = [];
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
+const initialHighScores = [
+    ['Winston Churchill', 50, 'Hard'],
+    ['Ernest Hemingway', 50, 'Hard'],
+    ['Frank Sinatra', 45, 'Hard'],
+    ['Oliver Stone', 40, 'Hard'],
+    ['Benjamin Franklin', 35, 'Medium'],
+    ['The Queen Mother', 30, 'Medium'],
+    ['Ava Gardner', 25, 'Medium'],
+    ['Vincent Van Gogh', 20, 'Easy'],
+    ['Boris Johnson', 15, 'Easy'],
+    ['Donald Trump', 10, 'Easy']
+];
 
 let cardsLength = 0; // This is used to ...
 let cardsPerRow = '';
@@ -28,9 +40,13 @@ Run functions in order
 */
 $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
-    let difficulty = new URLSearchParams(window.location.search).get('difficulty');
-    gameSetup(difficulty);
-    buildLayout();
+    let mode = new URLSearchParams(window.location.search).get('mode');
+    gameSetup(mode);
+    if (mode === "highScores") {
+        displayHighScores(initialHighScores);
+    } else {
+        buildLayout();
+    }
 });
 
 
@@ -38,9 +54,9 @@ $('document').ready(function () {
 set game-content and card divs..............
 */
 
-function gameSetup(difficulty) {
-    switch (difficulty) {
-        case ("easy"):
+function gameSetup(mode) {
+    switch (mode) {
+        case "easy":
             maxPairs = 6;
             cardsLength = 12;
             cardsPerRow = 'col-3';
@@ -48,7 +64,7 @@ function gameSetup(difficulty) {
             time = 30000;
             startTime = '0m : 30s';
             break;
-        case ("medium"):
+        case "medium":
             maxPairs = 9;
             cardsLength = 18;
             cardsPerRow = 'col-2';
@@ -56,7 +72,7 @@ function gameSetup(difficulty) {
             time = 50000;
             startTime = '0m : 50s';
             break;
-        case ("hard"):
+        case "hard":
             maxPairs = 12;
             cardsLength = 24;
             cardsPerRow = 'col-2';
@@ -64,11 +80,13 @@ function gameSetup(difficulty) {
             time = 75000;
             startTime = '1m : 15s';
             break;
+        case "highScores":
+            break;
     }
 };
 
 function buildLayout() {
-    let game = document.getElementById("game-board");
+    let game = document.getElementById("display-board");
     game.classList.add(colStyle);
 
     $("#timer").html(startTime);
@@ -177,7 +195,7 @@ function gameComplete() {
 }
 
 /*
-Display count functions for time, clicks and work out final score.......
+Display functions for time and highscores.......
 */
 // Game timer
 function timer(time) {
@@ -199,6 +217,29 @@ function timer(time) {
 
 function gameOver() {
     $('#GameLostModal').modal('toggle');
+}
+
+function displayHighScores(initialHighScores) {
+    let highScores = document.getElementById("display-board");
+    highScores.classList.add("score-board");
+
+    let header = document.createElement("h1");
+    let headerContent = document.createTextNode("The greatest drinkers of all time!");
+    header.appendChild(headerContent);
+    highScores.appendChild(header);
+
+    let table = document.createElement("table");
+    table.classList.add("high-scores-table");
+
+    for (let i = 0; i < initialHighScores.length; i++) {
+        let row = document.createElement("tr")
+        table.appendChild(row);
+        for (let j = 0; j < initialHighScores[i].length; j++) {
+            let result = `<th>${initialHighScores[i][j]}</th>`;
+            row.insertAdjacentHTML('beforeend', result);
+        }
+    }
+    highScores.appendChild(table);
 }
 
 // Sound Effect
