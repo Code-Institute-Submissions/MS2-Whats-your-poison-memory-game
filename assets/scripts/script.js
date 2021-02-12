@@ -230,7 +230,6 @@ function displayHighScores(initialHighScores) {
 
     let table = document.createElement("table");
     table.classList.add("high-scores-table");
-
     for (let i = 0; i < initialHighScores.length; i++) {
         let row = document.createElement("tr")
         table.appendChild(row);
