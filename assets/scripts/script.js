@@ -1,18 +1,18 @@
-
+let bonusPoints = 0;
 let cards = document.querySelectorAll("cards");
 let cardImages = [];
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
 const initialHighScores = [
-    ['Winston Churchill', 50, 'Hard'],
-    ['Ernest Hemingway', 50, 'Hard'],
-    ['Frank Sinatra', 45, 'Hard'],
-    ['Oliver Stone', 40, 'Hard'],
-    ['Benjamin Franklin', 35, 'Medium'],
-    ['The Queen Mother', 30, 'Medium'],
-    ['Ava Gardner', 25, 'Medium'],
-    ['Vincent Van Gogh', 20, 'Easy'],
-    ['Boris Johnson', 15, 'Easy'],
-    ['Donald Trump', 10, 'Easy']
+    [50, 'Winston Churchill', 'Hard'],
+    [45, 'Ernest Hemingway', 'Hard'],
+    [40, 'Frank Sinatra', 'Hard'],
+    [35, 'Oliver Stone', 'Hard'],
+    [30, 'Benjamin Franklin', 'Medium'],
+    [25, 'The Queen Mother', 'Medium'],
+    [20, 'Ava Gardner', 'Medium'],
+    [15, 'Vincent Van Gogh', 'Easy'],
+    [10, 'Boris Johnson', 'Easy'],
+    [5, 'Donald Trump', 'Easy']
 ];
 
 let cardsLength = 0; // This is used to ...
@@ -21,11 +21,13 @@ let clicksAllowed = 0;
 let clicksRemaining = 0;
 let colStyle = '';
 let extraTime = 0;
+let finalScore = 0;
 let firstCard, secondCard;
 let firstClick = 0;
 let flipsAllowed = 0;
 let gameLevel = sessionStorage.getItem("gameLevel");
 let hasFlippedCard = false;
+let highScore;
 let HighScoreData;
 let lockBoard = false;
 let matchedPairs = 0;
@@ -186,60 +188,74 @@ function resetBoardStatus() {
 };
 
 function gameComplete() {
-    $('#GameWonModal').modal('toggle');
-    let bonusPoints = (clicksRemaining * 2);
-    let finalScore = (timeRemaining * 2 + bonusPoints);
-    $("#finishTime").html(timeRemaining);
-    $("#bonusPoints").html(bonusPoints);
-    $("#finalScore").html(finalScore);
-}
+    bonusPoints = (clicksRemaining * 2);
+    finalScore = (timeRemaining * 2 + bonusPoints);
 
-/*
-Display functions for time and highscores.......
-*/
-// Game timer
-function timer(time) {
-    time = new Date().getTime() + (time);
-    gameTime = setInterval(function () {
-        let now = new Date().getTime();
-        timeDiff = time - now + extraTime;
-        let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-        timeRemaining = (minutes * 60) + seconds;
-        $("#timer").html(minutes + "m : " + seconds + "s ");
-        if (timeDiff < 1000) {
-            clearInterval(gameTime);
-            $("#timer").html("Time's Up!");
-            gameOver();
-        }
-    }, 1000);
-}
-
-function gameOver() {
-    $('#GameLostModal').modal('toggle');
-}
-
-function displayHighScores(initialHighScores) {
-    let highScores = document.getElementById("display-board");
-    highScores.classList.add("score-board");
-
-    let header = document.createElement("h1");
-    let headerContent = document.createTextNode("The greatest drinkers of all time!");
-    header.appendChild(headerContent);
-    highScores.appendChild(header);
-
-    let table = document.createElement("table");
-    table.classList.add("high-scores-table");
     for (let i = 0; i < initialHighScores.length; i++) {
-        let row = document.createElement("tr")
-        table.appendChild(row);
-        for (let j = 0; j < initialHighScores[i].length; j++) {
-            let result = `<th>${initialHighScores[i][j]}</th>`;
-            row.insertAdjacentHTML('beforeend', result);
-        }
+        if (finalScore >= initialHighScores[i][0]) {
+            highScore = true;
+            break;
+        };
+    };
+    if (highScore === true) {
+        $('#highScoreModal').modal('toggle');
+        $("#recordTime").html(timeRemaining);
+        $("#recordPoints").html(bonusPoints);
+        $("#recordScore").html(finalScore);
+    } else {
+        $('#GameWonModal').modal('toggle');
+        $("#finishTime").html(timeRemaining);
+        $("#bonusPoints").html(bonusPoints);
+        $("#finalScore").html(finalScore);
+    };
+};
+
+    /*
+    Display functions for time and highscores.......
+    */
+    // Game timer
+    function timer(time) {
+        time = new Date().getTime() + (time);
+        gameTime = setInterval(function () {
+            let now = new Date().getTime();
+            timeDiff = time - now + extraTime;
+            let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            timeRemaining = (minutes * 60) + seconds;
+            $("#timer").html(minutes + "m : " + seconds + "s ");
+            if (timeDiff < 1000) {
+                clearInterval(gameTime);
+                $("#timer").html("Time's Up!");
+                gameOver();
+            }
+        }, 1000);
     }
-    highScores.appendChild(table);
-}
+
+    function gameOver() {
+        $('#GameLostModal').modal('toggle');
+    }
+
+    function displayHighScores(initialHighScores) {
+        let highScores = document.getElementById("display-board");
+        highScores.classList.add("score-board");
+
+        let header = document.createElement("h1");
+        let headerContent = document.createTextNode("The greatest drinkers of all time!");
+        header.appendChild(headerContent);
+        highScores.appendChild(header);
+
+        let table = document.createElement("table");
+        table.classList.add("high-scores-table");
+        for (let i = 0; i < initialHighScores.length; i++) {
+            let row = document.createElement("tr")
+            table.appendChild(row);
+            for (let j = 0; j < initialHighScores[i].length; j++) {
+                let result = `<th>${initialHighScores[i][j]}</th>`;
+                row.insertAdjacentHTML('beforeend', result);
+            }
+        }
+        highScores.appendChild(table);
+    }
 
 // Sound Effect
 
