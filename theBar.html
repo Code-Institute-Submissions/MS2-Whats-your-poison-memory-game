@@ -54,46 +54,48 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
-                    <h4 class="modal-title text-center">Congratulations!! NEW HIGH SCORE!</h4>
-                    <h3 class="modal-title text-center">You set a new record, add your name below to get on the leader
-                        board.</h3>
+                    <h3 class="modal-title text-center gold-text">NEW HIGH SCORE!</h3>
+                    <h5 class="modal-title text-center">You set a new record, add your name below to get on the leader
+                        board.</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-block justify-content-center">
                     <div class="game-won container">
-                        <div class="row no-gutters time">
-                            <div class="col-6">
-                                <span>Time remaining:</span>
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
+                                <span>Time remaining: </span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="recordTime"></span>
                             </div>
                         </div>
-                        <div class="row no-gutters clicks">
+                        <div class="row no-gutters score-key">
                             <div class="col-6">
-                                <span>Bonus Points:</span>
+                                <span>Bonus Points: </span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="recordPoints"></span>
                             </div>
                         </div>
-                        <div class="row no-gutters score">
+                        <div class="row no-gutters score-key">
                             <div class="col-6">
-                                <span>Final Score:</span>
+                                <span>Final Score: </span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="recordScore"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn menu-button button-click"
-                            onclick="window.location.href='theBar.html?mode=highScores';">
-                            Save & view highscores</button>
-                        <button type="button" class="btn menu-button button-click" data-target="#newGameModal">
-                            Save & play again</button>
-                        <button type="button" class="btn exit-button button-click"
-                            onclick="window.location.href='index.html';" data-dismiss="modal">Don't save & Exit</button>
-                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn menu-button button-click"
+                        onclick="window.location.href='theBar.html?mode=highScores';">
+                        Save & view highscores</button>
+                    <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                        data-target="#newGameModal" data-dismiss="modal">Save and play again</button>
+                    <button type="button" class="btn menu-button-exit button-click"
+                        onclick="window.location.href='index.html';" data-dismiss="modal">Don't save &
+                        Exit</button>
+
                 </div>
             </div>
         </div>
@@ -104,38 +106,38 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
-                    <h4 class="modal-title text-center">Congratulations!! You drank the lot!</h4>
+                    <h3 class="modal-title text-center gold-text">You drank the lot!</h3>
+                    <h5 class="modal-title text-center">You didn't break any records this time....</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body d-block justify-content-center">
                     <div class="game-won container">
-                        <div class="row no-gutters time">
-                            <div class="col-6">
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
                                 <span>Time remaining:</span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="finishTime"></span>
                             </div>
                         </div>
-                        <div class="row no-gutters clicks">
-                            <div class="col-6">
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
                                 <span>Bonus Points:</span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="bonusPoints"></span>
                             </div>
                         </div>
-                        <div class="row no-gutters score">
-                            <div class="col-6">
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
                                 <span>Final Score:</span>
                             </div>
-                            <div class="col-6">
+                            <div class="col-6 score">
                                 <span id="finalScore"></span>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer justify-content-center">
                     <button type="button" class="btn menu-button button-click" data-toggle="modal"
                         data-target="#newGameModal" data-dismiss="modal">Play again</button>
                     <button type="button" class="btn exit-button button-click"
@@ -150,27 +152,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
-                    <h3 class="modal-title text-center">Closing time! Get out.</h3>
+                    <h3 class="modal-title text-center gold-text">Closing time...</h3>
+                    <h5 class="modal-title text-center">Get out!</h5>
                 </div>
                 <div class="modal-body">
-                    <div class="game-lost container">
+                    <div class="game-lost container justify-content-center">
                         <p>Looks like you've had one too many already! Times up I'm afraid,
                             you just weren't quick enough....
                         </p>
                         <p>Better luck next time.
                         </p>
                     </div>
-                    <div class="modal-footer">
-                        <div class="col-12">
-                            <div class="row d-flex justify-content-center">
-                                <button type="button" class="btn menu-button button-click" data-toggle="modal"
-                                    data-target="#newGameModal" data-dismiss="modal">Play again</button>
-                            </div>
-                            <div class="row d-flex justify-content-center">
-                                <button type="button" class="btn exit-button button-click"
-                                    onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
-                            </div>
-                        </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn menu-button button-click" data-toggle="modal"
+                            data-target="#newGameModal" data-dismiss="modal">Play again</button>
+                        <button type="button" class="btn exit-button button-click"
+                            onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                     </div>
                 </div>
             </div>
@@ -207,9 +204,9 @@
                         </li>
                     </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn exit-button button-click" data-toggle="modal"
-                        data-target="#mainMenuModal" data-dismiss="modal">Exit</button>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn exit-button button-click"
+                        onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                 </div>
             </div>
         </div>

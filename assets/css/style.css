@@ -71,13 +71,32 @@ ul, ol {
     margin: 20px;
 }
 
+.menu-button-exit {
+    color:black;
+    background-color: red;
+    border-radius: 20px;
+    width: 200px;
+    margin: 20px;
+}
+
 .exit-button {
     color:black;
     background-color: red;
     border-radius: 20px;
     width: 100px;
     margin: 20px;
+}
 
+.gold-text {
+    color: gold;
+}
+
+.score-key {
+    text-align: right;
+}
+
+.score {
+    text-align: center;
 }
 
 /* theBar.html */
@@ -256,7 +275,7 @@ ul, ol {
     background-position: center;
 }
 
-/* bestTimes.html */
+/* scoreboard */
 .score-board {
     background-color: black;
     position: absolute;
@@ -271,11 +290,26 @@ ul, ol {
     text-align: center;
 }
 
+.score-board h1 {
+    line-height: 50px;
+    height: 100px;
+    margin: auto;
+    color: gold;
+    text-decoration: underline;
+    width: 80%;
+}
+
 .score-board table {
     margin: auto;
+    margin-top: 0px;
+}
+
+.score-board table th {
+    color: gold;
+    text-decoration: underline;
 }
 
 .score-board table th,
 .score-board table td {
-    padding: 5px 22px;
+    padding: 5px 28px;
 }

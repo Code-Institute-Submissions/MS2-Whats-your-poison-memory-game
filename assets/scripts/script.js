@@ -35,6 +35,7 @@ let maxPairs = 0;
 let selected = [];
 let shuffled = [];
 let startTime = "";
+const tableHeaders = ['Position', 'Name', 'Difficulty'];
 let time = 0;
 
 /* 
@@ -246,11 +247,19 @@ function gameComplete() {
 
         let table = document.createElement("table");
         table.classList.add("high-scores-table");
+
+        let headertitles = document.createElement("tr");
+        table.appendChild(headertitles);
+        for (let h = 0; h < tableHeaders.length; h++) {
+            let titles = `<th>${tableHeaders[h]}</th>`;
+                headertitles.insertAdjacentHTML('beforeend', titles);
+        }
+
         for (let i = 0; i < initialHighScores.length; i++) {
             let row = document.createElement("tr")
             table.appendChild(row);
             for (let j = 0; j < initialHighScores[i].length; j++) {
-                let result = `<th>${initialHighScores[i][j]}</th>`;
+                let result = `<td>${initialHighScores[i][j]}</td>`;
                 row.insertAdjacentHTML('beforeend', result);
             }
         }
