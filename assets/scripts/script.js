@@ -1,3 +1,4 @@
+let backGroundMusic = new Audio('../audio/bensound-thejazzpiano.mp3');
 let bonusPoints = 0; //clicks remaining *2 for score
 let cardImages = []; //used to add randomly selected new array of cardRange depending on game size
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
@@ -42,6 +43,7 @@ $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
     mode = new URLSearchParams(window.location.search).get('mode');
     gameSetup(mode);
+    play();
     if (mode === "highScores") { // check if highscores has been selected first
         displayHighScores(highScores);
     } else {  //if not highscores then call buildLayout
@@ -306,3 +308,7 @@ function displayHighScores() {
     };
     highScoreDisplay.appendChild(table);
 };
+
+function playSound() {
+    backGroundMusic.play();
+}
