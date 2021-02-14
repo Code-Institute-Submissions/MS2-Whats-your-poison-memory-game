@@ -2,7 +2,7 @@ let bonusPoints = 0; //clicks remaining *2 for score
 let cardImages = []; //used to add randomly selected new array of cardRange depending on game size
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
     'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
-const initialHighScores = [
+let highScores = [
     [50, 'Winston Churchill', 'Hard'],
     [45, 'Ernest Hemingway', 'Hard'],
     [40, 'Frank Sinatra', 'Hard'],
@@ -27,9 +27,10 @@ let flipsAllowed = 0; //sets target for optimal clicks to complete game
 let hasFlippedCard = false; //used to see if card has already been clicked
 let lockBoard = false; //boolean used to prevent more than 2 cards being flipped at the same time
 let matchedPairs = 0; //records a match to evaluate if game has been won
-
+let mode = ''; //used for game level settings
 let maxPairs = 0; //sets matches required to win in game mode
 let newHighScore; //boolean used if users final score >= any position in initialHighScores array
+let savedHighScores = sessionStorage.getItem('highScoreList') || '[]'; //checks local storage for exsisting player high scores
 let startTime = ""; //set in game level and displayed above cards before timer() is called
 const tableHeaders = ['Position', 'Name', 'Difficulty']; //used for highscore table display
 let time = 0; //time is set by game level on load
@@ -39,10 +40,10 @@ Run functions in order
 */
 $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
-    let mode = new URLSearchParams(window.location.search).get('mode');
+    mode = new URLSearchParams(window.location.search).get('mode');
     gameSetup(mode);
     if (mode === "highScores") { // check if highscores has been selected first
-        displayHighScores(initialHighScores);
+        displayHighScores(highScores);
     } else {  //if not highscores then call buildLayout
         buildLayout();
     }
@@ -210,8 +211,8 @@ function gameComplete() {
     bonusPoints = (clicksRemaining * 2); //set bonusPoints value
     finalScore = (timeRemaining * 2 + bonusPoints); //set final score value
 
-    for (let i = 0; i < initialHighScores.length; i++) { //checks if final score is higher than current highscores
-        if (finalScore >= initialHighScores[i][0]) {
+    for (let i = 0; i < 10; i++) { //checks if final score is higher than current highscores
+        if (finalScore >= highScores[i][0]) {
             newHighScore = true; //boolean usead to trigger modal if score qualifys
             break; //break out of function if criteria met
         };
@@ -229,15 +230,18 @@ function gameComplete() {
     };
 };
 
+/*
+record player details as array, check session storage and add details to records, update session storage
+*/
 function saveHighScore() {
-    let name = $('#playerName');
-    name = name.val();
-    let highScoreDetails = new Array(finalScore, name, mode);
-    console.log(highScoreDetails);
+    let name = $('#playerName'); //sets name from text input
+    name = name.val(); //takes value of text
+    let highScoreDetails = new Array(finalScore, name, mode); //creates array
 
-    initialHighScores.push(highScoreDetails);
-    initialHighScores.sort(function (a, b) { return b[0] - a[0]; });
-    console.log(initialHighScores);
+    let playerHighScores = [...JSON.parse(savedHighScores), highScoreDetails]; //checks for session storage and adds new array
+    playerHighScores.sort(function (a, b) { return b[0] - a[0]; }); //sorts player records
+
+    sessionStorage.setItem('highScoreList', JSON.stringify(playerHighScores)); //stores back in session storage
 };
 
 /*
@@ -271,14 +275,14 @@ function outOfTime() {
 /*
 Displays high score table inplace of game when called
 */
-function displayHighScores(initialHighScores) {
-    let highScores = document.getElementById("display-board");
-    highScores.classList.add("score-board"); //sets class on display-board div
+function displayHighScores() {
+    let highScoreDisplay = document.getElementById("display-board");
+    highScoreDisplay.classList.add("score-board"); //sets class on display-board div
 
     let header = document.createElement("h1");
     let headerContent = document.createTextNode("The greatest drinkers of all time!");
     header.appendChild(headerContent);
-    highScores.appendChild(header); //creates and adds H1 header to display-board
+    highScoreDisplay.appendChild(header); //creates and adds H1 header to display-board
 
     let table = document.createElement("table");
     table.classList.add("high-scores-table"); //creates and adds high-scores-table to display-board
@@ -290,13 +294,16 @@ function displayHighScores(initialHighScores) {
         headerTitles.insertAdjacentHTML('beforeend', titles);
     }; //inserts headerTitles in bold to row
 
+    let fullList = JSON.parse(savedHighScores).concat(highScores); //checks session storage and concats with highscores
+    fullList.sort(function (a, b) { return b[0] - a[0]; }); //sorts array into decending order
+
     for (let i = 0; i < 10; i++) {
         let row = document.createElement("tr")
         table.appendChild(row); //adds row to table
-        for (let j = 0; j < initialHighScores[i].length; j++) {
-            let result = `<td>${initialHighScores[i][j]}</td>`;
+        for (let j = 0; j < 3; j++) {
+            let result = `<td>${fullList[i][j]}</td>`;
             row.insertAdjacentHTML('beforeend', result);
         }; //inserts initialHighScore records to row
     };
-    highScores.appendChild(table);
+    highScoreDisplay.appendChild(table);
 };
