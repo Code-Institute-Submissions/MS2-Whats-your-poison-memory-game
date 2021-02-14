@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans&display=swap');
 
 /* General styling */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+@media (max-width: 1027px) { 
+.header {
+    font-size: 25px;
+}
 }
 
 body {
@@ -13,6 +20,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     z-index: -1;
+    font-family: 'amatic', 'open-sans';
 }
 
 .option-button {
@@ -26,7 +34,11 @@ body {
 
 .header {
     color: white;
+    margin-top: 8px;
     text-align: center;
+    background-color: black;
+    border: 2px solid grey;
+    border-radius: 5px;
 }
 
 ul, ol {
@@ -104,12 +116,15 @@ ul, ol {
 }
 
 /* theBar.html */
-.score-bar
-.time-bar, p {
+.score-bar p,
+.time-bar p {
     font-size: 20px;
     color: white;
     text-align: center;
     margin-top: 8px;
+    background-color: black;
+    border: 2px solid grey;
+    border-radius: 5px;
 }
 
 .game-box {
@@ -135,6 +150,18 @@ ul, ol {
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
+}
+
+@media (max-width: 445px) { 
+.game-content-medium {
+    position: absolute;
+    top: 200px;
+    max-width: 1100px;
+    bottom: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+}
 }
 
 .game-content-large {
@@ -187,7 +214,7 @@ ul, ol {
 	border: 2px solid grey;
 }
 
-/* CARDS */
+/* *********************************** CARDS **************************************** */
 .aviation {
     background-image: url("../images/aviation.jpg");
     background-size: 70%;
@@ -208,7 +235,7 @@ ul, ol {
 }
 .cosmopolitan {
     background-image: url("../images/cosmopolitan.jpg");
-    background-size: 70%;
+    background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -256,7 +283,7 @@ ul, ol {
 }
 .mojito {
     background-image: url("../images/mojito.jpg");
-    background-size: 60%;
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -279,7 +306,103 @@ ul, ol {
     background-position: center;
 }
 
-/* scoreboard */
+/* *********************************** CARDS media small **************************************** */
+
+@media (max-width: 445px) { 
+.aviation {
+    background-image: url("../images/aviation.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.bloodyMary {
+    background-image: url("../images/bloodyMary.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.champagneCocktail {
+    background-image: url("../images/champagneCocktail.jpg");
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.cosmopolitan {
+    background-image: url("../images/cosmopolitan.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.french75 {
+    background-image: url("../images/french75.jpg");
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.longIsland {
+    background-image: url("../images/longIsland.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.maiTai {
+    background-image: url("../images/maiTai.jpg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.margarita {
+    background-image: url("../images/margarita.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.martini {
+    background-image: url("../images/martini.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.maryPicford {
+    background-image: url("../images/maryPicford.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mimosa {
+    background-image: url("../images/mimosa.jpg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.mojito {
+    background-image: url("../images/mojito.jpg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.oldFashioned {
+    background-image: url("../images/oldFashioned.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.piscoSour {
+    background-image: url("../images/piscoSour.jpg");
+    background-size: 95%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.tequilaSunrise {
+    background-image: url("../images/tequilaSunrise.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+}
+
+
+/* *********************** scoreboard ************************** */
 .score-board {
     background-color: black;
     position: absolute;
@@ -296,7 +419,6 @@ ul, ol {
 
 .score-board h1 {
     line-height: 50px;
-    height: 100px;
     margin: auto;
     color: gold;
     text-decoration: underline;
@@ -316,4 +438,22 @@ ul, ol {
 .score-board table th,
 .score-board table td {
     padding: 5px 28px;
+}
+
+
+@media (max-width: 445px) { 
+.score-board h1 {
+    font-size: 25px;
+    line-height: 30px;
+    margin: auto;
+    padding: none;
+    color: gold;
+    text-decoration: underline;
+    width: 80%;
+}
+
+.score-board table th,
+.score-board table td {
+    padding: 2px 5px;
+}
 }

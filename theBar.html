@@ -14,38 +14,43 @@
 
     <!-- Title -->
     <div class="container-fluid">
-        <div class="row no-gutters">
-            <div class="col-2">
+        <div class="row d-flex no-gutters">
+            <div class="col-2 d-none d-md-block"></div>
+            <div class="col-3 col-md-2">
                 <button type="button" class="btn option-button center">
                     Mute
                 </button>
             </div>
-            <div class="col-8">
+            <div class="col-6 col-md-4">
                 <h1 class="header">What's your poison?</h1>
             </div>
-            <div class="col-2">
+            <div class="col-3 col-md-2">
                 <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
                     Exit
                 </button>
             </div>
+            <div class="col-2 d-none d-md-block"></div>
         </div>
     </div>
 
     <!-- Score/Time/Exit -->
     <div class="container">
-        <div class="row no-gutters">
-            <div class="col-6 score-bar">
-                <p>Flips allowed: <span id="flipsAllowed"> 0 </span></p>
+        <div class="row d-flex p-2  no-gutters">
+            <div class="col-2 d-none d-md-block"></div>
+            <div class="col-6 col-md-3 score-bar">
+                <p class="counter">Flips allowed: <span id="flipsAllowed"> 0 </span></p>
             </div>
-            <div class="col-6 time-bar">
-                <p>Timer: <span id="timer"></span></p>
+            <div class="col-2 d-none d-md-block"></div>
+            <div class="col-6 col-md-3 time-bar">
+                <p class="counter">Timer: <span id="timer"></span></p>
             </div>
+            <div class="col-2 d-none d-md-block"></div>
         </div>
     </div>
 
     <!-- Central container for everything -->
     <div class="container game-box">
-        <div class="container-fluid no-gutters" id="display-board"></div>
+        <div class="container-fluid d-flex no-gutters" id="display-board"></div>
     </div>
 
     <!-- New High score Modal -->
@@ -93,7 +98,7 @@
                         </form>
                         <br>
                         <button type="button" class="btn menu-button button-click"
-                            onclick="saveHighScore();">
+                            onclick="saveHighScore(); window.location.href='theBar.html?mode=highScores';">
                             Save & view highscores</button>
                     </div>
                 </div>
@@ -180,44 +185,6 @@
                         <button type="button" class="btn exit-button button-click"
                             onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- New Game Modal -->
-    <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-labelledby="gameMenu" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content mainMenu">
-                <div class="modal-header d-block">
-                    <h4 class="modal-title text-center">Game difficulty?</h4>
-                </div>
-                <div class="modal-body">
-                    <ul>
-                        <li>
-                            <p>So your ready to begin, your options are:</p>
-                        </li>
-                        <li>
-                            <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html?difficulty=easy';" id="easy">Easy - 12
-                                drinks</button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html?difficulty=medium';" id="medium">Medium -
-                                20
-                                drinks</button>
-                        </li>
-                        <li>
-                            <button type="button" class="btn menu-button new-game"
-                                onclick="window.location.href='theBar.html?difficulty=hard';" id="hard">Hard - 30
-                                drinks</button>
-                        </li>
-                    </ul>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn exit-button button-click"
-                        onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                 </div>
             </div>
         </div>

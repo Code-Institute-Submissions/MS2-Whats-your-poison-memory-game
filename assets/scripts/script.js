@@ -3,16 +3,16 @@ let cardImages = []; //used to add randomly selected new array of cardRange depe
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
     'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
 let highScores = [
-    [50, 'Winston Churchill', 'Hard'],
-    [45, 'Ernest Hemingway', 'Hard'],
-    [40, 'Frank Sinatra', 'Hard'],
-    [35, 'Oliver Stone', 'Hard'],
-    [30, 'Benjamin Franklin', 'Medium'],
-    [25, 'The Queen Mother', 'Medium'],
-    [20, 'Ava Gardner', 'Medium'],
-    [15, 'Vincent Van Gogh', 'Easy'],
-    [10, 'Boris Johnson', 'Easy'],
-    [5, 'Donald Trump', 'Easy']
+    [100, 'Winston Churchill', 'Hard'],
+    [90, 'Ernest Hemingway', 'Hard'],
+    [80, 'Frank Sinatra', 'Hard'],
+    [70, 'Oliver Stone', 'Hard'],
+    [60, 'Benjamin Franklin', 'Medium'],
+    [50, 'The Queen Mother', 'Medium'],
+    [40, 'Ava Gardner', 'Medium'],
+    [30, 'Vincent Van Gogh', 'Easy'],
+    [20, 'Boris Johnson', 'Easy'],
+    [10, 'Donald Trump', 'Easy']
 ]; //starter highscore targets
 
 let cardsLength = 0; //used to set flipsAllowed target and also create all the div's in buidGame()
@@ -32,7 +32,7 @@ let maxPairs = 0; //sets matches required to win in game mode
 let newHighScore; //boolean used if users final score >= any position in initialHighScores array
 let savedHighScores = sessionStorage.getItem('highScoreList') || '[]'; //checks local storage for exsisting player high scores
 let startTime = ""; //set in game level and displayed above cards before timer() is called
-const tableHeaders = ['Position', 'Name', 'Difficulty']; //used for highscore table display
+const tableHeaders = ['Score', 'Name', 'Difficulty']; //used for highscore table display
 let time = 0; //time is set by game level on load
 
 /* 
@@ -49,13 +49,12 @@ $('document').ready(function () {
     }
 });
 
-
 /*
 set game-content and starting values based on mode selected
 */
 function gameSetup(mode) {
     switch (mode) {
-        case "easy":
+        case "Easy":
             maxPairs = 6;
             cardsLength = 12;
             cardsPerRow = 'col-3';
@@ -63,7 +62,7 @@ function gameSetup(mode) {
             time = 30000;
             startTime = '0m : 30s';
             break;
-        case "medium":
+        case "Medium":
             maxPairs = 9;
             cardsLength = 18;
             cardsPerRow = 'col-2';
@@ -71,7 +70,7 @@ function gameSetup(mode) {
             time = 50000;
             startTime = '0m : 50s';
             break;
-        case "hard":
+        case "Hard":
             maxPairs = 12;
             cardsLength = 24;
             cardsPerRow = 'col-2';
@@ -303,7 +302,7 @@ function displayHighScores() {
         for (let j = 0; j < 3; j++) {
             let result = `<td>${fullList[i][j]}</td>`;
             row.insertAdjacentHTML('beforeend', result);
-        }; //inserts initialHighScore records to row
+        }; //inserts HighScore records to row
     };
     highScoreDisplay.appendChild(table);
 };
