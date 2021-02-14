@@ -11,17 +11,10 @@
 </head>
 
 <body>
-    <audio controls autoplay>
-        <source src="../audio/bensound-thejazzpiano.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
     <!-- Title -->
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
-            <div class="col-2 text-center">
-                <button type="button" class="btn option-button center" on-click="playSound()">
-                    Mute
-                </button>
+            <div class="col-2 d-none d-md-block">
             </div>
             <div class="col-10 col-md-8">
                 <h1 class="header">What's your poison?</h1>
@@ -110,7 +103,7 @@
     </div>
 
     <!-- New Game Modal -->
-    <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-labelledby="gameMenu" aria-hidden="true">
+    <div class="modal fade" id="newGameModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">

@@ -2,7 +2,7 @@
 let bonusPoints = 0; //clicks remaining *2 for score
 let cardImages = []; //used to add randomly selected new array of cardRange depending on game size
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
-    'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
+    'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise'];
 let highScores = [
     [100, 'Winston Churchill', 'Hard'],
     [90, 'Ernest Hemingway', 'Hard'],
@@ -43,7 +43,6 @@ $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
     mode = new URLSearchParams(window.location.search).get('mode');
     gameSetup(mode);
-    play();
     if (mode === "highScores") { // check if highscores has been selected first
         displayHighScores(highScores);
     } else {  //if not highscores then call buildLayout
@@ -83,7 +82,7 @@ function gameSetup(mode) {
         case "highScores":
             break;
     }
-};
+}
 
 /*
 Once level has been selected add class to game container, randomise card selection and create all the card div's
@@ -97,9 +96,9 @@ function buildLayout() {
     $("#flipsAllowed").html(flipsAllowed); //sets and displays flips allowed based on card length
 
     // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
-    let shuffled = cardRange.sort(function () { return .5 - Math.random() });
+    let shuffled = cardRange.sort(function () { return 0.5 - Math.random(); });
     let selected = shuffled.slice(0, maxPairs);
-    cardImages = selected.concat(selected); cardImages.sort(function () { return .5 - Math.random() });
+    cardImages = selected.concat(selected); cardImages.sort(function () { return 0.5 - Math.random(); });
 
     for (let i = 0; i < cardsLength; i++) { //loop to repeat until correct number of cards generated
         let card = document.createElement('div'); //creates a div
@@ -127,7 +126,7 @@ function buildLayout() {
 
         game.appendChild(card); //appends card to game container DIV and repeats loop
     }
-};
+}
 
 
 /*
@@ -155,7 +154,7 @@ function flipCard() {
     $("#flipsAllowed").html(clicksRemaining);
 
     checkForMatch(); //calls function to see if cards match
-};
+}
 
 /*
 ternary operator checking if firstCard & secondCard 'data-id' are a match
@@ -163,7 +162,7 @@ ternary operator checking if firstCard & secondCard 'data-id' are a match
 function checkForMatch() {
     let isMatch = firstCard.dataset.id === secondCard.dataset.id;  //checks if dataset.id are a macth
     isMatch ? pairMatched() : pairDontMatch(); //if true calls pairMatched() : if false calls pairsDontMatch
-};
+}
 
 /*
 cards match function, removes event listener, increases matchedPairs count
@@ -175,7 +174,7 @@ function pairMatched() {
     matchedPairs += 1;
 
     checkGameWon();
-};
+}
 
 /*
 sees if matchedPairs counter === maxPairs value ternary operator
@@ -183,7 +182,7 @@ sees if matchedPairs counter === maxPairs value ternary operator
 function checkGameWon() {
     let gameWon = matchedPairs === maxPairs;
     gameWon ? (clearInterval(gameTime), gameComplete()) : resetBoardStatus(); //true - clears timer and calls gameComplete, false calls resetBoardStatus
-};
+}
 
 /*
 firstCard secondCard don't match
@@ -195,7 +194,7 @@ function pairDontMatch() {
         secondCard.classList.remove('flip'); //removes flip css so cards flip back
         resetBoardStatus(); //calls resetBoardStatus
     }, 800); //timeout of just under 1s
-};
+}
 
 /*
 resetBoardStatus clears values used in flipcard & checkformatch functions
@@ -203,7 +202,7 @@ resetBoardStatus clears values used in flipcard & checkformatch functions
 function resetBoardStatus() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
-};
+}
 
 /*
 after a pair match check if game is complete
@@ -216,8 +215,8 @@ function gameComplete() {
         if (finalScore >= highScores[i][0]) {
             newHighScore = true; //boolean usead to trigger modal if score qualifys
             break; //break out of function if criteria met
-        };
-    };
+        }
+    }
     if (newHighScore === true) { //if newHighScore is true fires the following modal with display
         $('#highScoreModal').modal('toggle');
         $("#recordTime").html(timeRemaining);
@@ -228,8 +227,8 @@ function gameComplete() {
         $("#finishTime").html(timeRemaining);
         $("#bonusPoints").html(bonusPoints);
         $("#finalScore").html(finalScore);
-    };
-};
+    }
+}
 
 /*
 record player details as array, check session storage and add details to records, update session storage
@@ -243,7 +242,7 @@ function saveHighScore() {
     playerHighScores.sort(function (a, b) { return b[0] - a[0]; }); //sorts player records
 
     sessionStorage.setItem('highScoreList', JSON.stringify(playerHighScores)); //stores back in session storage
-};
+}
 
 /*
 Display functions for time and highscores.......
@@ -262,16 +261,16 @@ function timer() { //time value taken from game setting difficulty
             clearInterval(gameTime);
             $("#timer").html("Time's Up!");
             outOfTime();
-        };
+        }
     }, 1000); //refresh every second
-};
+}
 
 /*
 out of time triggers gameLostModal
 */
 function outOfTime() {
     $('#gameLostModal').modal('toggle');
-};
+}
 
 /*
 Displays high score table inplace of game when called
@@ -293,18 +292,18 @@ function displayHighScores() {
     for (let h = 0; h < tableHeaders.length; h++) {
         let titles = `<th>${tableHeaders[h]}</th>`;
         headerTitles.insertAdjacentHTML('beforeend', titles);
-    }; //inserts headerTitles in bold to row
+    } //inserts headerTitles in bold to row
 
     let fullList = JSON.parse(savedHighScores).concat(highScores); //checks session storage and concats with highscores
     fullList.sort(function (a, b) { return b[0] - a[0]; }); //sorts array into decending order
 
     for (let i = 0; i < 10; i++) {
-        let row = document.createElement("tr")
+        let row = document.createElement("tr");
         table.appendChild(row); //adds row to table
         for (let j = 0; j < 3; j++) {
             let result = `<td>${fullList[i][j]}</td>`;
             row.insertAdjacentHTML('beforeend', result);
-        }; //inserts HighScore records to row
-    };
+        } //inserts HighScore records to row
+    }
     highScoreDisplay.appendChild(table);
-};
+}
