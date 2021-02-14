@@ -84,14 +84,23 @@
                                 <span id="recordScore"></span>
                             </div>
                         </div>
+                    </div><br>
+
+                    <div class="player-name">
+                        <form method="get">
+                            <label for="playerName">Enter your name: </label>
+                            <input type="text" id="playerName" name="playerName" value="" maxlength="16">
+                        </form>
+                        <br>
+                        <button type="button" class="btn menu-button button-click"
+                            onclick="window.location.href='theBar.html?mode=highScores';">
+                            Save & view highscores</button>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn menu-button button-click"
-                        onclick="window.location.href='theBar.html?mode=highScores';">
-                        Save & view highscores</button>
-                    <button type="button" class="btn menu-button button-click" data-toggle="modal"
-                        data-target="#newGameModal" data-dismiss="modal">Save and play again</button>
+                        onclick="window.location.href=window.location.href;">
+                        Play again</button>
                     <button type="button" class="btn menu-button-exit button-click"
                         onclick="window.location.href='index.html';" data-dismiss="modal">Don't save &
                         Exit</button>
@@ -102,7 +111,7 @@
     </div>
 
     <!-- Game Won Modal -->
-    <div class="modal fade" id="GameWonModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
+    <div class="modal fade" id="gameWonModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
@@ -138,8 +147,9 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn menu-button button-click" data-toggle="modal"
-                        data-target="#newGameModal" data-dismiss="modal">Play again</button>
+                    <button type="button" class="btn menu-button button-click"
+                        onclick="window.location.href=window.location.href;">
+                        Play again</button>
                     <button type="button" class="btn exit-button button-click"
                         onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                 </div>
@@ -148,7 +158,7 @@
     </div>
 
     <!-- Game Lost Modal -->
-    <div class="modal fade" id="GameLostModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
+    <div class="modal fade" id="gameLostModal" tabindex="-1" role="dialog" aria-labelledby="gameWon" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
                 <div class="modal-header d-block">
@@ -164,8 +174,9 @@
                         </p>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn menu-button button-click" data-toggle="modal"
-                            data-target="#newGameModal" data-dismiss="modal">Play again</button>
+                        <button type="button" class="btn menu-button button-click"
+                            onclick="window.location.href=window.location.href;">
+                            Play again</button>
                         <button type="button" class="btn exit-button button-click"
                             onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
                     </div>

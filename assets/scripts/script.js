@@ -1,7 +1,7 @@
-let bonusPoints = 0;
-let cards = document.querySelectorAll("cards");
-let cardImages = [];
-const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75', 'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
+let bonusPoints = 0; //clicks remaining *2 for score
+let cardImages = []; //used to add randomly selected new array of cardRange depending on game size
+const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
+    'longIsland', 'maiTai', 'margarita', 'martini', 'maryPicford', 'mimosa', 'mojito', 'oldFashioned', 'piscoSour', 'tequilaSunrise']
 const initialHighScores = [
     [50, 'Winston Churchill', 'Hard'],
     [45, 'Ernest Hemingway', 'Hard'],
@@ -13,30 +13,26 @@ const initialHighScores = [
     [15, 'Vincent Van Gogh', 'Easy'],
     [10, 'Boris Johnson', 'Easy'],
     [5, 'Donald Trump', 'Easy']
-];
+]; //starter highscore targets
 
-let cardsLength = 0; // This is used to ...
-let cardsPerRow = '';
-let clicksAllowed = 0;
-let clicksRemaining = 0;
-let colStyle = '';
-let extraTime = 0;
-let finalScore = 0;
-let firstCard, secondCard;
-let firstClick = 0;
-let flipsAllowed = 0;
-let gameLevel = sessionStorage.getItem("gameLevel");
-let hasFlippedCard = false;
-let highScore;
-let HighScoreData;
-let lockBoard = false;
-let matchedPairs = 0;
-let maxPairs = 0;
-let selected = [];
-let shuffled = [];
-let startTime = "";
-const tableHeaders = ['Position', 'Name', 'Difficulty'];
-let time = 0;
+let cardsLength = 0; //used to set flipsAllowed target and also create all the div's in buidGame()
+let cardsPerRow = ''; //sets 'col-3' or 'col-2' depending on game difficulty
+let clicksRemaining = 0; //flipsAllowed -= 2 in first click function displayed on screen
+let colStyle = ''; //adjusts #display-board class for CSS alterations
+let extraTime = 0; //time increase set in level difficulty and used in timer()
+let finalScore = 0; //timeRemaining*2 + bonusPoints
+let firstCard, secondCard; //Used in comparator to check for cards match
+let firstClick = 0; //used to add value to set first click and prevent card being flipped multiple times
+let flipsAllowed = 0; //sets target for optimal clicks to complete game
+let hasFlippedCard = false; //used to see if card has already been clicked
+let lockBoard = false; //boolean used to prevent more than 2 cards being flipped at the same time
+let matchedPairs = 0; //records a match to evaluate if game has been won
+
+let maxPairs = 0; //sets matches required to win in game mode
+let newHighScore; //boolean used if users final score >= any position in initialHighScores array
+let startTime = ""; //set in game level and displayed above cards before timer() is called
+const tableHeaders = ['Position', 'Name', 'Difficulty']; //used for highscore table display
+let time = 0; //time is set by game level on load
 
 /* 
 Run functions in order 
@@ -45,18 +41,17 @@ $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
     let mode = new URLSearchParams(window.location.search).get('mode');
     gameSetup(mode);
-    if (mode === "highScores") {
+    if (mode === "highScores") { // check if highscores has been selected first
         displayHighScores(initialHighScores);
-    } else {
+    } else {  //if not highscores then call buildLayout
         buildLayout();
     }
 });
 
 
 /*
-set game-content and card divs..............
+set game-content and starting values based on mode selected
 */
-
 function gameSetup(mode) {
     switch (mode) {
         case "easy":
@@ -88,32 +83,35 @@ function gameSetup(mode) {
     }
 };
 
+/*
+Once level has been selected add class to game container, randomise card selection and create all the card div's
+*/
 function buildLayout() {
     let game = document.getElementById("display-board");
-    game.classList.add(colStyle);
+    game.classList.add(colStyle); //adds class to alter css based on easy/medium/hard
 
-    $("#timer").html(startTime);
+    $("#timer").html(startTime); //sets start time display before timer() function is called
     flipsAllowed = cardsLength * 2;
-    $("#flipsAllowed").html(flipsAllowed);
+    $("#flipsAllowed").html(flipsAllowed); //sets and displays flips allowed based on card length
 
     // https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
     let shuffled = cardRange.sort(function () { return .5 - Math.random() });
     let selected = shuffled.slice(0, maxPairs);
-    let cardImages = selected.concat(selected); cardImages.sort(function () { return .5 - Math.random() });
+    cardImages = selected.concat(selected); cardImages.sort(function () { return .5 - Math.random() });
 
-    for (let i = 0; i < cardsLength; i++) {
-        let card = document.createElement('div');
-        card.className = (`${cardsPerRow} cards`);
-        card.setAttribute('data-id', cardImages[i]);
-        card.addEventListener('click', flipCard);
+    for (let i = 0; i < cardsLength; i++) { //loop to repeat until correct number of cards generated
+        let card = document.createElement('div'); //creates a div
+        card.className = (`${cardsPerRow} cards`); //adds to class names to card div
+        card.setAttribute('data-id', cardImages[i]); //sets data-id to match cardImage[loop] used to check for matching cards
+        card.addEventListener('click', flipCard); //adds event listener to each card
 
         let frontOfCard = document.createElement('div');
-        frontOfCard.className = `frontFace ${cardImages[i]}`;
+        frontOfCard.className = `frontFace ${cardImages[i]}`; //creates a front of card div with css class and image class
 
         let backOfCard = document.createElement('div');
-        backOfCard.className = "backFace";
+        backOfCard.className = "backFace"; //creates a back of card div with css class
 
-        card.append(frontOfCard, backOfCard);
+        card.append(frontOfCard, backOfCard); //appends front and back div's to card div
 
         /*
         The html looks like this:
@@ -125,7 +123,7 @@ function buildLayout() {
         </div>
         */
 
-        game.appendChild(card);
+        game.appendChild(card); //appends card to game container DIV and repeats loop
     }
 };
 
@@ -134,33 +132,41 @@ function buildLayout() {
 Game play functions.................................
 */
 
+//onclick function for cards, toggles flip class for css effects
 function flipCard() {
     firstClick += 1;
-    if (firstClick == 1) timer(time);
+    if (firstClick == 1) timer(time); //starts timer on firstClick
 
-    if (lockBoard) return;
-    if (this === firstCard) return;
+    if (lockBoard) return; //checks if lockboard is true and returns out of function
+    if (this === firstCard) return; //checks the same card isn't clicked twice
 
-    this.classList.toggle('flip');
+    this.classList.toggle('flip'); //if valid, flips card using css class
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
-        firstCard = this;
+        firstCard = this; //stores this as first card
         return;
     }
-    secondCard = this;
+    secondCard = this; //stores this as second card
 
-    clicksRemaining = flipsAllowed -= 2;
+    clicksRemaining = flipsAllowed -= 2; //after 2 valid card turns adjusts the clicksRemaining counter and display
     $("#flipsAllowed").html(clicksRemaining);
 
-    checkForMatch();
+    checkForMatch(); //calls function to see if cards match
 };
 
+/*
+ternary operator checking if firstCard & secondCard 'data-id' are a match
+*/
 function checkForMatch() {
-    let isMatch = firstCard.dataset.id === secondCard.dataset.id;
-    isMatch ? pairMatched() : pairDontMatch();
+    let isMatch = firstCard.dataset.id === secondCard.dataset.id;  //checks if dataset.id are a macth
+    isMatch ? pairMatched() : pairDontMatch(); //if true calls pairMatched() : if false calls pairsDontMatch
 };
 
+/*
+cards match function, removes event listener, increases matchedPairs count
+and calls checkGameWon function
+*/
 function pairMatched() {
     firstCard.removeEventListener('click', flipCard);
     secondCard.removeEventListener('click', flipCard);
@@ -169,107 +175,128 @@ function pairMatched() {
     checkGameWon();
 };
 
+/*
+sees if matchedPairs counter === maxPairs value ternary operator
+*/
 function checkGameWon() {
     let gameWon = matchedPairs === maxPairs;
-    gameWon ? (clearInterval(gameTime), gameComplete()) : resetBoardStatus();
+    gameWon ? (clearInterval(gameTime), gameComplete()) : resetBoardStatus(); //true - clears timer and calls gameComplete, false calls resetBoardStatus
 };
 
+/*
+firstCard secondCard don't match
+*/
 function pairDontMatch() {
-    lockBoard = true;
-    setTimeout(() => {
-        firstCard.classList.remove('flip');
-        secondCard.classList.remove('flip');
-        resetBoardStatus();
-    }, 800);
+    lockBoard = true; //prevents further clicks till function complete
+    setTimeout(() => { //timeout used to keep cards visible for short period
+        firstCard.classList.remove('flip'); //removes flip css so cards flip back
+        secondCard.classList.remove('flip'); //removes flip css so cards flip back
+        resetBoardStatus(); //calls resetBoardStatus
+    }, 800); //timeout of just under 1s
 };
 
+/*
+resetBoardStatus clears values used in flipcard & checkformatch functions
+*/
 function resetBoardStatus() {
     [hasFlippedCard, lockBoard] = [false, false];
     [firstCard, secondCard] = [null, null];
 };
 
+/*
+after a pair match check if game is complete
+*/
 function gameComplete() {
-    bonusPoints = (clicksRemaining * 2);
-    finalScore = (timeRemaining * 2 + bonusPoints);
+    bonusPoints = (clicksRemaining * 2); //set bonusPoints value
+    finalScore = (timeRemaining * 2 + bonusPoints); //set final score value
 
-    for (let i = 0; i < initialHighScores.length; i++) {
+    for (let i = 0; i < initialHighScores.length; i++) { //checks if final score is higher than current highscores
         if (finalScore >= initialHighScores[i][0]) {
-            highScore = true;
-            break;
+            newHighScore = true; //boolean usead to trigger modal if score qualifys
+            break; //break out of function if criteria met
         };
     };
-    if (highScore === true) {
+    if (newHighScore === true) { //if newHighScore is true fires the following modal with display
         $('#highScoreModal').modal('toggle');
         $("#recordTime").html(timeRemaining);
         $("#recordPoints").html(bonusPoints);
         $("#recordScore").html(finalScore);
-    } else {
-        $('#GameWonModal').modal('toggle');
+    } else { //if newHighScore is false displays game complete modal with display
+        $('#gameWonModal').modal('toggle');
         $("#finishTime").html(timeRemaining);
         $("#bonusPoints").html(bonusPoints);
         $("#finalScore").html(finalScore);
     };
 };
 
-    /*
-    Display functions for time and highscores.......
-    */
-    // Game timer
-    function timer(time) {
-        time = new Date().getTime() + (time);
-        gameTime = setInterval(function () {
-            let now = new Date().getTime();
-            timeDiff = time - now + extraTime;
-            let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-            timeRemaining = (minutes * 60) + seconds;
-            $("#timer").html(minutes + "m : " + seconds + "s ");
-            if (timeDiff < 1000) {
-                clearInterval(gameTime);
-                $("#timer").html("Time's Up!");
-                gameOver();
-            }
-        }, 1000);
-    }
+function saveHighScore() {
+    let name = $('#playerName');
+    name = name.val();
+    let highScoreDetails = new Array(finalScore, name, mode);
+    console.log(highScoreDetails);
 
-    function gameOver() {
-        $('#GameLostModal').modal('toggle');
-    }
+    initialHighScores.push(highScoreDetails);
+    initialHighScores.sort(function (a, b) { return b[0] - a[0]; });
+    console.log(initialHighScores);
+};
 
-    function displayHighScores(initialHighScores) {
-        let highScores = document.getElementById("display-board");
-        highScores.classList.add("score-board");
+/*
+Display functions for time and highscores.......
+*/
+// Game timer
+function timer() { //time value taken from game setting difficulty
+    time = new Date().getTime() + (time); //sets time countdown
+    gameTime = setInterval(function () { //uses interval to refresh display
+        let now = new Date().getTime(); //sets current time
+        timeDiff = time - now; //calcs time difference in correct format
+        let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); //works out minutes
+        let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000); //works out seconds
+        timeRemaining = (minutes * 60) + seconds;
+        $("#timer").html(minutes + "m : " + seconds + "s "); //updates timer display html
+        if (timeDiff < 1000) { //when timer finishes calls outOfTime()
+            clearInterval(gameTime);
+            $("#timer").html("Time's Up!");
+            outOfTime();
+        };
+    }, 1000); //refresh every second
+};
 
-        let header = document.createElement("h1");
-        let headerContent = document.createTextNode("The greatest drinkers of all time!");
-        header.appendChild(headerContent);
-        highScores.appendChild(header);
+/*
+out of time triggers gameLostModal
+*/
+function outOfTime() {
+    $('#gameLostModal').modal('toggle');
+};
 
-        let table = document.createElement("table");
-        table.classList.add("high-scores-table");
+/*
+Displays high score table inplace of game when called
+*/
+function displayHighScores(initialHighScores) {
+    let highScores = document.getElementById("display-board");
+    highScores.classList.add("score-board"); //sets class on display-board div
 
-        let headertitles = document.createElement("tr");
-        table.appendChild(headertitles);
-        for (let h = 0; h < tableHeaders.length; h++) {
-            let titles = `<th>${tableHeaders[h]}</th>`;
-                headertitles.insertAdjacentHTML('beforeend', titles);
-        }
+    let header = document.createElement("h1");
+    let headerContent = document.createTextNode("The greatest drinkers of all time!");
+    header.appendChild(headerContent);
+    highScores.appendChild(header); //creates and adds H1 header to display-board
 
-        for (let i = 0; i < initialHighScores.length; i++) {
-            let row = document.createElement("tr")
-            table.appendChild(row);
-            for (let j = 0; j < initialHighScores[i].length; j++) {
-                let result = `<td>${initialHighScores[i][j]}</td>`;
-                row.insertAdjacentHTML('beforeend', result);
-            }
-        }
-        highScores.appendChild(table);
-    }
+    let table = document.createElement("table");
+    table.classList.add("high-scores-table"); //creates and adds high-scores-table to display-board
 
-// Sound Effect
+    let headerTitles = document.createElement("tr"); //adds row to table
+    table.appendChild(headerTitles);
+    for (let h = 0; h < tableHeaders.length; h++) {
+        let titles = `<th>${tableHeaders[h]}</th>`;
+        headerTitles.insertAdjacentHTML('beforeend', titles);
+    }; //inserts headerTitles in bold to row
 
-//var backGroundSound;
-//var correctSound;
-//var errorSound;
-//var winSound;
-//var lossSound;
+    for (let i = 0; i < 10; i++) {
+        let row = document.createElement("tr")
+        table.appendChild(row); //adds row to table
+        for (let j = 0; j < initialHighScores[i].length; j++) {
+            let result = `<td>${initialHighScores[i][j]}</td>`;
+            row.insertAdjacentHTML('beforeend', result);
+        }; //inserts initialHighScore records to row
+    };
+    highScores.appendChild(table);
+};

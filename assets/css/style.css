@@ -99,6 +99,10 @@ ul, ol {
     text-align: center;
 }
 
+.player-name {
+    text-align: center;
+}
+
 /* theBar.html */
 .score-bar
 .time-bar, p {
