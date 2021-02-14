@@ -1,4 +1,4 @@
-let backGroundMusic = new Audio('../audio/bensound-thejazzpiano.mp3');
+
 let bonusPoints = 0; //clicks remaining *2 for score
 let cardImages = []; //used to add randomly selected new array of cardRange depending on game size
 const cardRange = ['aviation', 'bloodyMary', 'champagneCocktail', 'cosmopolitan', 'french75',
@@ -308,7 +308,3 @@ function displayHighScores() {
     };
     highScoreDisplay.appendChild(table);
 };
-
-function playSound() {
-    backGroundMusic.play();
-}
