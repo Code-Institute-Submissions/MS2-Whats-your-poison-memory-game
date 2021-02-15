@@ -9,10 +9,10 @@
 ### User Stories
 
 As a user I would like to:
-    * Have the game rules explained to me if needed.
-    * Test my memory skills in a fun environment.
-    * Have options to increase the difficulty of the game as I progress.
-    * Record my time taken on the different levels to challenge myself to improve.
+* Have the game rules explained to me if needed.
+* Test my memory skills in a fun environment.
+* Have options to increase the difficulty of the game as I progress.
+* Record my time taken on the different levels to challenge myself to improve.
 
 ### Strategy
 
@@ -25,10 +25,10 @@ For users there needs to be an explanation of how to play available. Additional 
 ### Structure
 
 To keep navigation as self explanatory as possible the structure of the site should create a natural flow as follows.
-    * Home page will use Modals with options to either start a new game with difficulty option, check the rules or check the high scores.
-    * The game page will start after selection of difficulty and on completition pass/fail a modal will provide the option to input name if it's a high score pass,
+* Home page will use Modals with options to either start a new game with difficulty option, check the rules or check the high scores.
+* The game page will start after selection of difficulty and on completition pass/fail a modal will provide the option to input name if it's a high score pass,
      start again or exit back to home if a fail.
-    * The high scores page will only have navigation to return to home page.
+* The high scores page will only have navigation to return to home page.
 
 ### Skeleton
 
@@ -168,15 +168,47 @@ Console.log was used throughout building code for JS functions. All now removed.
     ![updated high score display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/updatedHighScore.png "updated high score")
 
 ### User stories Testing
+* Have the game rules explained to me if needed.
+    * Complete
+* Test my memory skills in a fun environment.
+    * Complete
+* Have options to increase the difficulty of the game as I progress.
+    * Complete
+* Record my time taken on the different levels to challenge myself to improve.
+    * Complete
 
+All user stories have been fullfilled from original targets. Game functions are all working and no issues found.
 
 ## Deployment
+1. I went to my GitHub repository - https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game
+2. Clicked on the settings icon in the top right of the screen.
+3. Scrolled down to the GitHub Pages section.
+4. Switched the source to master branch.
+5. Waited for page to refresh.
+6. Page is published to - https://david-a-ray.github.io/MS2-Whats-your-poison-memory-game/
 
+### Git Clone
+* To clone my repository follow these steps:
+1. Go to my GitHub repository - https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game
+2. Click on the CODE drop down button.
+3. With the HTTPS option selected click on the clipboard icon.
+4. Open your IDE.
+5. Create a directory you want the clone to be named as.
+6. Type git clone in your terminal followed by pasting the link you've copied.
+7. Hit enter and your local clone will be created.
 
 ## Credits
 
-
 ### media
-    * Images and rights to use taken from Shutterstock.com
+* All images and rights to use taken from Shutterstock.com
+
+### Code
+Some of the code for the site was taken or influenced by the following sources:
+* free Code Camp - memory game tutorial
+    https://marina-ferreira.github.io/tutorials/js/memory-game/
+    * functions used from here and adapted from here: flipCard(), pairMatched(), pairDontMatch(), resetBoard(), 
+* stackoverflow.com - timer function
+    https://stackoverflow.com/questions/23025867/game-timer-javascript
 
 ### Acknowledgments
+I would like to thank my mentor Reuben Ferrante for advice and help with troubleshooting.

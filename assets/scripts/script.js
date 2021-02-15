@@ -133,7 +133,10 @@ function buildLayout() {
 Game play functions.................................
 */
 
-//onclick function for cards, toggles flip class for css effects
+/*
+onclick function for cards, toggles flip class for css effects
+initial code taken form https://marina-ferreira.github.io/tutorials/js/memory-game/ and adapted
+*/
 function flipCard() {
     firstClick += 1;
     if (firstClick == 1) timer(time); //starts timer on firstClick
@@ -158,6 +161,7 @@ function flipCard() {
 
 /*
 ternary operator checking if firstCard & secondCard 'data-id' are a match
+initial code taken form https://marina-ferreira.github.io/tutorials/js/memory-game/ and adapted
 */
 function checkForMatch() {
     let isMatch = firstCard.dataset.id === secondCard.dataset.id;  //checks if dataset.id are a macth
@@ -167,6 +171,7 @@ function checkForMatch() {
 /*
 cards match function, removes event listener, increases matchedPairs count
 and calls checkGameWon function
+initial code taken form https://marina-ferreira.github.io/tutorials/js/memory-game/ and adapted
 */
 function pairMatched() {
     firstCard.removeEventListener('click', flipCard);
@@ -186,6 +191,7 @@ function checkGameWon() {
 
 /*
 firstCard secondCard don't match
+initial code taken form https://marina-ferreira.github.io/tutorials/js/memory-game/ and adapted
 */
 function pairDontMatch() {
     lockBoard = true; //prevents further clicks till function complete
@@ -198,6 +204,7 @@ function pairDontMatch() {
 
 /*
 resetBoardStatus clears values used in flipcard & checkformatch functions
+initial code taken form https://marina-ferreira.github.io/tutorials/js/memory-game/ and adapted
 */
 function resetBoardStatus() {
     [hasFlippedCard, lockBoard] = [false, false];
@@ -246,6 +253,7 @@ function saveHighScore() {
 
 /*
 Display functions for time and highscores.......
+influenced by stackoverflow: https://stackoverflow.com/questions/23025867/game-timer-javascript
 */
 // Game timer
 function timer() { //time value taken from game setting difficulty
