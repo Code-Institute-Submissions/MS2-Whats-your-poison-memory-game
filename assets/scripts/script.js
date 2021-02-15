@@ -38,6 +38,7 @@ let time = 0; //time is set by game level on load
 
 /* 
 Run functions in order 
+assistance with code from mentor
 */
 $('document').ready(function () {
     // grab the query parameter from the url and pass it to game setup
