@@ -1,191 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <link rel="stylesheet" href="assets/css/style.css">
-      <title>The Bar</title>
-   </head>
-   <body>
-      <!-- Title -->
-      <div class="container-fluid">
-         <div class="row d-flex no-gutters">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The drink related card memory game to test your skills!">
+    <meta name="keywords" content="memory, card, drinks">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>The Bar</title>
+</head>
+
+<body>
+    <!-- Title -->
+    <div class="container-fluid">
+        <div class="row d-flex no-gutters">
             <div class="col-2 d-none d-md-block"></div>
             <div class="col-3 col-md-2"></div>
             <div class="col-6 col-md-4">
-               <h1 class="header">What's your poison?</h1>
+                <h1 class="header">What's your poison?</h1>
             </div>
             <div class="col-3 col-md-2">
-               <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
-               Exit
-               </button>
+                <button type="button" class="btn option-button center" onclick="window.location.href='index.html';">
+                    Exit
+                </button>
             </div>
             <div class="col-2 d-none d-md-block"></div>
-         </div>
-      </div>
-      <!-- Score/Time -->
-      <div class="container">
-         <div class="row d-flex p-2  no-gutters">
+        </div>
+    </div>
+    <!-- Score/Time -->
+    <div class="container">
+        <div class="row d-flex p-2  no-gutters">
             <div class="col-2 d-none d-md-block"></div>
             <div class="col-6 col-md-3 score-bar">
-               <p class="counter">Flips allowed: <span id="flipsAllowed"> 0 </span></p>
+                <p class="counter">Flips allowed: <span id="flipsAllowed"> 0 </span></p>
             </div>
             <div class="col-2 d-none d-md-block"></div>
             <div class="col-6 col-md-3 time-bar">
-               <p class="counter">Timer: <span id="timer"></span></p>
+                <p class="counter">Timer: <span id="timer"></span></p>
             </div>
             <div class="col-2 d-none d-md-block"></div>
-         </div>
-      </div>
-      <!-- Central container for everything -->
-      <div class="container game-box">
-         <div class="container-fluid d-flex no-gutters" id="display-board"></div>
-      </div>
-      <!-- New High score Modal -->
-      <div class="modal fade" id="highScoreModal" tabindex="-1" role="dialog"
-         aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered" role="document">
+        </div>
+    </div>
+    <!-- Central container for everything -->
+    <div class="container game-box">
+        <div class="container-fluid d-flex no-gutters" id="display-board"></div>
+    </div>
+    <!-- New High score Modal -->
+    <div class="modal fade" id="highScoreModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content mainMenu">
-               <div class="modal-header d-block">
-                  <h3 class="modal-title text-center gold-text">NEW HIGH SCORE!</h3>
-                  <h5 class="modal-title text-center">You set a new record, add your name below to get on the leader
-                     board.
-                  </h5>
-               </div>
-               <div class="modal-body d-block justify-content-center">
-                  <div class="game-won container">
-                     <div class="row no-gutters">
-                        <div class="col-6 score-key">
-                           <span>Time remaining: </span>
+                <div class="modal-header d-block">
+                    <h3 class="modal-title text-center gold-text">NEW HIGH SCORE!</h3>
+                    <h5 class="modal-title text-center">You set a new record, add your name below to get on the leader
+                        board.
+                    </h5>
+                </div>
+                <div class="modal-body d-block justify-content-center">
+                    <div class="game-won container">
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
+                                <span>Time remaining: </span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="recordTime"></span>
+                            </div>
                         </div>
-                        <div class="col-6 score">
-                           <span id="recordTime"></span>
+                        <div class="row no-gutters score-key">
+                            <div class="col-6">
+                                <span>Bonus Points: </span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="recordPoints"></span>
+                            </div>
                         </div>
-                     </div>
-                     <div class="row no-gutters score-key">
-                        <div class="col-6">
-                           <span>Bonus Points: </span>
+                        <div class="row no-gutters score-key">
+                            <div class="col-6">
+                                <span>Final Score: </span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="recordScore"></span>
+                            </div>
                         </div>
-                        <div class="col-6 score">
-                           <span id="recordPoints"></span>
-                        </div>
-                     </div>
-                     <div class="row no-gutters score-key">
-                        <div class="col-6">
-                           <span>Final Score: </span>
-                        </div>
-                        <div class="col-6 score">
-                           <span id="recordScore"></span>
-                        </div>
-                     </div>
-                  </div>
-                  <br>
-                  <div class="player-name">
-                     <form method="get">
-                        <label for="playerName">Enter your name: </label>
-                        <input type="text" id="playerName" name="playerName" value="" maxlength="16">
-                     </form>
-                     <br>
-                     <button type="button" class="btn menu-button button-click"
-                        onclick="saveHighScore(); window.location.href='theBar.html?mode=highScores';">
-                     Save & view highscores</button>
-                  </div>
-               </div>
-               <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn menu-button button-click"
-                     onclick="window.location.href=window.location.href;">
-                  Play again</button>
-                  <button type="button" class="btn menu-button-exit button-click"
-                     onclick="window.location.href='index.html';" data-dismiss="modal">Don't save &
-                  Exit</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Game Won Modal -->
-      <div class="modal fade" id="gameWonModal" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content mainMenu">
-               <div class="modal-header d-block">
-                  <h3 class="modal-title text-center gold-text">You drank the lot!</h3>
-                  <h5 class="modal-title text-center">You didn't break any records this time....</h5>
-               </div>
-               <div class="modal-body d-block justify-content-center">
-                  <div class="game-won container">
-                     <div class="row no-gutters">
-                        <div class="col-6 score-key">
-                           <span>Time remaining:</span>
-                        </div>
-                        <div class="col-6 score">
-                           <span id="finishTime"></span>
-                        </div>
-                     </div>
-                     <div class="row no-gutters">
-                        <div class="col-6 score-key">
-                           <span>Bonus Points:</span>
-                        </div>
-                        <div class="col-6 score">
-                           <span id="bonusPoints"></span>
-                        </div>
-                     </div>
-                     <div class="row no-gutters">
-                        <div class="col-6 score-key">
-                           <span>Final Score:</span>
-                        </div>
-                        <div class="col-6 score">
-                           <span id="finalScore"></span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn menu-button button-click"
-                     onclick="window.location.href=window.location.href;">
-                  Play again</button>
-                  <button type="button" class="btn exit-button button-click"
-                     onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Game Lost Modal -->
-      <div class="modal fade" id="gameLostModal" tabindex="-1" role="dialog" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content mainMenu">
-               <div class="modal-header d-block">
-                  <h3 class="modal-title text-center gold-text">Closing time...</h3>
-                  <h5 class="modal-title text-center">Get out!</h5>
-               </div>
-               <div class="modal-body">
-                  <div class="game-lost container justify-content-center text-center">
-                     <p>Looks like you've had one too many already! Times up I'm afraid,
-                        you just weren't quick enough....
-                     </p>
-                     <p>Better luck next time.
-                     </p>
-                  </div>
-                  <div class="modal-footer justify-content-center">
-                     <button type="button" class="btn menu-button button-click"
+                    </div>
+                    <br>
+                    <div class="player-name">
+                        <form method="get">
+                            <label for="playerName">Enter your name: </label>
+                            <input type="text" id="playerName" name="playerName" value="" maxlength="16">
+                        </form>
+                        <br>
+                        <button type="button" class="btn menu-button button-click"
+                            onclick="saveHighScore(); window.location.href='theBar.html?mode=highScores';">
+                            Save & view highscores</button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn menu-button button-click"
                         onclick="window.location.href=window.location.href;">
-                     Play again</button>
-                     <button type="button" class="btn exit-button button-click"
-                        onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
-                  </div>
-               </div>
+                        Play again</button>
+                    <button type="button" class="btn menu-button-exit button-click"
+                        onclick="window.location.href='index.html';" data-dismiss="modal">Don't save &
+                        Exit</button>
+                </div>
             </div>
-         </div>
-      </div>
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-         crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-         crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-         crossorigin="anonymous"></script>
-      <script src="./assets/scripts/script.js"></script>
-   </body>
+        </div>
+    </div>
+    <!-- Game Won Modal -->
+    <div class="modal fade" id="gameWonModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mainMenu">
+                <div class="modal-header d-block">
+                    <h3 class="modal-title text-center gold-text">You drank the lot!</h3>
+                    <h5 class="modal-title text-center">You didn't break any records this time....</h5>
+                </div>
+                <div class="modal-body d-block justify-content-center">
+                    <div class="game-won container">
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
+                                <span>Time remaining:</span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="finishTime"></span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
+                                <span>Bonus Points:</span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="bonusPoints"></span>
+                            </div>
+                        </div>
+                        <div class="row no-gutters">
+                            <div class="col-6 score-key">
+                                <span>Final Score:</span>
+                            </div>
+                            <div class="col-6 score">
+                                <span id="finalScore"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn menu-button button-click"
+                        onclick="window.location.href=window.location.href;">
+                        Play again</button>
+                    <button type="button" class="btn exit-button button-click"
+                        onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Game Lost Modal -->
+    <div class="modal fade" id="gameLostModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content mainMenu">
+                <div class="modal-header d-block">
+                    <h3 class="modal-title text-center gold-text">Closing time...</h3>
+                    <h5 class="modal-title text-center">Get out!</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="game-lost container justify-content-center text-center">
+                        <p>Looks like you've had one too many already! Times up I'm afraid,
+                            you just weren't quick enough....
+                        </p>
+                        <p>Better luck next time.
+                        </p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn menu-button button-click"
+                            onclick="window.location.href=window.location.href;">
+                            Play again</button>
+                        <button type="button" class="btn exit-button button-click"
+                            onclick="window.location.href='index.html';" data-dismiss="modal">Exit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="./assets/scripts/script.js"></script>
+</body>
+
 </html>

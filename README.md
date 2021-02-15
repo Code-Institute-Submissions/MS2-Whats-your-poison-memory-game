@@ -2,6 +2,8 @@
 
 "What's your poison" is a version of a traditional memory game involving cards showing a range of cocktail images the user needs to find the matching pair.
 
+![Am I responsive](docs/Responsive Screens.png)
+
 ## UX
 
 ### User Stories
@@ -9,13 +11,12 @@
 As a user I would like to:
     * Have the game rules explained to me if needed.
     * Test my memory skills in a fun environment.
-    * Have an option to mute any sound effects.
     * Have options to increase the difficulty of the game as I progress.
     * Record my time taken on the different levels to challenge myself to improve.
 
 ### Strategy
 
-The goal is to build a simple to navigate site with a welcome Modal with game options that then guides the user through the site and back to the start once game is complete.
+The goal is to build a simple to navigate site with a welcome Modal with game options that then guides the user through the site and back to the start when choosing to exit.
 
 ### Scope
 
@@ -38,7 +39,7 @@ Wire frames for page layouts and modals as follows:
 
 ### Surface
 
-The look and feel of the site is to feel like your in a bar environment.
+The look and feel of the site is to feel like your in a vintage bar environment, dark classical colours with fun easy to identify cocktail images.
 
 ## Technologies
 
