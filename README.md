@@ -121,16 +121,51 @@ Console.log was used throughout building code for JS functions. All now removed.
 * index.html
     * Header central and responsive.
     * Lets begin button central and triggers first modal.
+
     ![Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/homeScreen.png "Home Screen")
 
     * firstModal - display and option
+
     ![First Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/firstModal.png "first modal")
 
     * RulesModal - display and exit button
+
     ![Rules Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/RulesModal.png "rules modal")
 
+    * NewGameModal - display and button options
 
+    ![New Game Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/DifficultyModal.png "new game modal")
 
+* theBar.html
+    * High Scores display - creates table in thebar.html
+
+    ![High scores display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/Highscores.png "high scores display")
+
+    * Easy Game Screen - all tested but only showing 1 set.
+        * clicks allowed, timer and exit button all displayed correctly.
+        * Card layouts all correct.
+
+    ![Easy game display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameEasy.png "easy game display")
+
+    * Card flips and match functions working. Timer reducing after first click and clicks allowed altering with airs clicked.
+
+    ![game function display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameFunction.png "game function display")
+
+    * Game lost modal pop up when timer reaches 0.
+
+    ![game lost modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/GameLostModal.png "game lost modal")
+
+    * Game won no record modal when final score isn't high enough to get on score board.
+
+    ![game won modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameWonModal.png "game won modal")
+
+    * New high record modal display with name entry field
+
+    ![game record modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameWonRecord.png "game record modal")
+
+    * Updated highscore display with "test" added as username
+
+    ![updated high score display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/updatedHighScore.png "updated high score")
 
 ### User stories Testing
 
