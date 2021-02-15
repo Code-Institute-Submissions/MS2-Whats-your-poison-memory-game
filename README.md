@@ -117,6 +117,11 @@ Console.log was used throughout building code for JS functions. All now removed.
     * W3 CSS validator.
     * Code beautifyer was used for JS.
 
+### Lighthouse testing in developer tools
+* Ran lighthouse on the deployed site and the results were all positive as shown below.
+
+![lighthouse testing](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/lighthouseScores.png "lighthouse testing")
+
 ### Feature testing
 * index.html
     * Header central and responsive.
