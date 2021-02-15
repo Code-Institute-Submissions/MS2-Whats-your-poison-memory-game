@@ -105,6 +105,33 @@ The look and feel of the site is to feel like your in a vintage bar environment,
 Throughout development the site was previewed locally and tested as elements were added. The layout waschecked for responsiveness using developer tools. 
 Console.log was used throughout building code for JS functions. All now removed.
 
+### Post-Deployment
+* Deployed site was shared with friends and family. Some issues came back with cards not displaying drinks on Safari.
+    * Ran the CSS through Autoprefixer to fix issues.
+* Main Menu Modal was not displayed in the center.
+    * CSS was adjusted
+
+### Final checks on code
+* Code validation
+    * W3 HTML validator.
+    * W3 CSS validator.
+    * Code beautifyer was used for JS.
+
+### Feature testing
+* index.html
+    * Header central and responsive.
+    * Lets begin button central and triggers first modal.
+    ![Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/homeScreen.png "Home Screen")
+
+    * firstModal - display and option
+    ![First Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/firstModal.png "first modal")
+
+    * RulesModal - display and exit button
+    ![Rules Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/RulesModal.png "rules modal")
+
+
+
+
 ### User stories Testing
 
 
