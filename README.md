@@ -2,7 +2,7 @@
 
 "What's your poison" is a version of a traditional memory game involving cards showing a range of cocktail images the user needs to find the matching pair.
 
-![Am I responsive](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/Responsive%20Screens.png)
+![Am I responsive](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/responsive.png)
 
 ## UX
 
@@ -33,9 +33,9 @@ To keep navigation as self explanatory as possible the structure of the site sho
 ### Skeleton
 
 Wire frames for page layouts and modals as follows:
-* [Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/Home%20Screen.pdf)
-* [Game Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/assets/docs/Game%20screen.pdf)
-* [High score screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/assets/docs/High%20Score%20page.pdf)
+* [Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/homeWire.pdf)
+* [Game Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/assets/documentation/gameWire.pdf)
+* [High score screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/assets/documentation/scoreWire.pdf)
 
 ### Surface
 
@@ -122,50 +122,50 @@ Console.log was used throughout building code for JS functions. All now removed.
     * Header central and responsive.
     * Lets begin button central and triggers first modal.
 
-    ![Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/homeScreen.png "Home Screen")
+    ![Home Screen](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/homeScreen.png "Home Screen")
 
     * firstModal - display and option
 
-    ![First Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/firstModal.png "first modal")
+    ![First Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/firstModal.png "first modal")
 
     * RulesModal - display and exit button
 
-    ![Rules Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/RulesModal.png "rules modal")
+    ![Rules Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/rulesModal.png "rules modal")
 
     * NewGameModal - display and button options
 
-    ![New Game Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/DifficultyModal.png "new game modal")
+    ![New Game Modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/difficultyModal.png "new game modal")
 
 * theBar.html
     * High Scores display - creates table in thebar.html
 
-    ![High scores display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/Highscores.png "high scores display")
+    ![High scores display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/highScores.png "high scores display")
 
     * Easy Game Screen - all tested but only showing 1 set.
         * clicks allowed, timer and exit button all displayed correctly.
         * Card layouts all correct.
 
-    ![Easy game display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameEasy.png "easy game display")
+    ![Easy game display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/gameEasy.png "easy game display")
 
     * Card flips and match functions working. Timer reducing after first click and clicks allowed altering with airs clicked.
 
-    ![game function display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameFunction.png "game function display")
+    ![game function display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/gameFunction.png "game function display")
 
     * Game lost modal pop up when timer reaches 0.
 
-    ![game lost modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/GameLostModal.png "game lost modal")
+    ![game lost modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/gameLostModal.png "game lost modal")
 
     * Game won no record modal when final score isn't high enough to get on score board.
 
-    ![game won modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameWonModal.png "game won modal")
+    ![game won modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/gameWonModal.png "game won modal")
 
     * New high record modal display with name entry field
 
-    ![game record modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/gameWonRecord.png "game record modal")
+    ![game record modal](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/gameWonRecord.png "game record modal")
 
     * Updated highscore display with "test" added as username
 
-    ![updated high score display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/docs/testing%20Images/updatedHighScore.png "updated high score")
+    ![updated high score display](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/testing/updatedHighScore.png "updated high score")
 
 ### User stories Testing
 * Have the game rules explained to me if needed.
@@ -201,6 +201,9 @@ All user stories have been fullfilled from original targets. Game functions are 
 
 ### media
 * All images and rights to use taken from Shutterstock.com
+
+* Card cocktail images were cropped from this image from Shutterstock.com
+![full cocktail image](https://github.com/David-A-Ray/MS2-Whats-your-poison-memory-game/blob/master/documentation/fullCocktails.jpg "full cocktail picture")
 
 ### Code
 Some of the code for the site was taken or influenced by the following sources:
