@@ -78,11 +78,17 @@ ul, ol {
     font-size: 30px;
 }
 
+.modal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .mainMenu {
     background-color: black;
     width: 50vh;
     color: white;
-    opacity: 0.9;
     border-radius: 20px;
 }
 
